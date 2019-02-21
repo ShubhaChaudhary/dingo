@@ -11,17 +11,17 @@ router.get('/', (req, res) => {
         })
     )
 })
-router.post('/',async (req,res)=>{
-    const body=await (req.body)
-    console.log(body)
-       var data= new Data(
-       {
-        site:body.site,
-       })
-      data.save().then((doc)=>{
-        res.send(doc)
-       }).catch((e)=>{
-           console.log("can't save data")
-       })
-   })
+// router.post('/',async (req,res)=>{
+//     const body=await (req.body)
+//     console.log(body)
+//        var data= new Data(
+//        {
+//         site:body.site,
+//        })
+//       data.save().then((doc)=>{
+//         res.send(doc)
+//        }).catch((e)=>{
+//            console.log("can't save data")
+//        })
+//    })
 module.exports = router
