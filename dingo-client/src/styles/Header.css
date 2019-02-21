@@ -1,0 +1,19 @@
+header {
+  position: absolute;
+  width: 100%;
+  height: 78px;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  background: #252525;
+}
+
+header #navigation .button{
+    color: #C5C29B;
+    margin-left: 21px;
+    display: inline;
+}
+
