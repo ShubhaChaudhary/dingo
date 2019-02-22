@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header'
 import Filter from './components/Filter'
-import BarChart from "./components/BarChart";
+// import BarChart from "./components/BarChart";
 import LineChart from "./components/LineChart";
 
 class App extends Component {
