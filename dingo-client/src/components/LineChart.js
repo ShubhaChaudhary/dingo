@@ -15,7 +15,7 @@ class LineChart extends React.Component {
                 ],
                 datasets: [{
                     label: 'Component life span',
-                    data: [3, 4, 2, 5],
+                    data: [3, 4, 14, 5],
                     backgroundColor: '#313de8'
                 }]
 
@@ -26,7 +26,17 @@ class LineChart extends React.Component {
     render() {
 
         return (
-            <Line data={this.state.chartData} />
+            <Line data={this.state.chartData} options={{
+
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+
+            }} />
         )
     }
 }

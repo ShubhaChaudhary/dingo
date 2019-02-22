@@ -11,12 +11,12 @@ class BarChart extends React.Component {
                     '0 - 999',
                     '1000 - 1999',
                     '2000 - 2999',
-                    '3000 - 3999'
+                    '3000 - 3999',
                 ],
                 datasets: [{
                     label: 'Component life span',
-                    data: [3, 4, 2, 5],
-                    backgroundColor: 'red'
+                    data: [3, 4, 14, 5],
+                    backgroundColor: '#313de8'
                 }]
 
             }
@@ -25,7 +25,17 @@ class BarChart extends React.Component {
 
     render() {
         return (
-            <Bar data={this.state.chartData} />
+            <Bar data={this.state.chartDa options={{
+
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+
+            }} />
         )
     }
 }
