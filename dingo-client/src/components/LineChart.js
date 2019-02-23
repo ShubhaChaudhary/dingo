@@ -1,7 +1,7 @@
 import React from 'react'
-import { Bar } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 
-class BarChart extends React.Component {
+class LineChart extends React.Component {
     constructor(props) {
         super(props)
 
@@ -11,7 +11,7 @@ class BarChart extends React.Component {
                     '0 - 999',
                     '1000 - 1999',
                     '2000 - 2999',
-                    '3000 - 3999',
+                    '3000 - 3999'
                 ],
                 datasets: [{
                     label: 'Component life span',
@@ -24,8 +24,9 @@ class BarChart extends React.Component {
     }
 
     render() {
+
         return (
-            <Bar data={this.state.chartData} options={{
+            <Line data={this.state.chartData} options={{
 
                 scales: {
                     yAxes: [{
@@ -40,4 +41,4 @@ class BarChart extends React.Component {
     }
 }
 
-export default BarChart
+export default LineChart
