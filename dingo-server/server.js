@@ -17,7 +17,8 @@ mongoose.connect(database, (err) => {
 app.use('/data',require('./routes/data'))
 
 app.get('/', (req, res) => {
-    res.status(200).send("Dingo Dashboard")
+    res.status(200).send("Dingo Dashboard ")
+  
 })
 
 const PORT = process.env.PORT || 3001
