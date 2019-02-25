@@ -12,12 +12,12 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-            <React.Fragment>
-                <Route exact path="/" component={Login}/>
-                <Route exact path="/Benchmark" component={Benchmark}/>
-                <Route exact path="/Performance" component={Performance}/>
-            </React.Fragment>
-        </Router>    
+          <React.Fragment>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/Benchmark" component={Benchmark} />
+            <Route exact path="/Performance" component={Performance} />
+          </React.Fragment>
+        </Router>
       </div>
     );
   }

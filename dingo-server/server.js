@@ -1,6 +1,7 @@
 const app = require('express')()
 const cors = require('cors')
-const bodyParser= require('body-parser')
+const bodyParser = require('body-parser')
+let PORT = 3001
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -14,7 +15,7 @@ mongoose.connect(database, (err) => {
         console.log('Connected to database!')
     }
 })
-app.use('/data',require('./routes/data'))
+app.use('/data', require('./routes/data'))
 
 app.get('/', (req, res) => {
     res.status(200).send("Dingo Dashboard ")
