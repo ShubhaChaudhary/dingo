@@ -9,6 +9,7 @@ class Filter extends React.Component {
             <from>
                 <label for="site">Site:</label><br />
                 <select id="site">
+
                     <option>Site 1</option>
                     <option>Site 2</option>
                     <option>Site 3</option>

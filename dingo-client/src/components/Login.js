@@ -31,8 +31,10 @@ export default () => {
                     <Button type="submit" variant="contained" color="primary" >Login</Button>
                 </form>
             </Paper >
-
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Singapore_Hitachi-ZAXIS-200-excavator-01.jpg" width="50%" />
+            <div style={{ 'margin-left': '5%' }}>
+                <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' /><br />
+                <img src={require("../mining-excavator.png")} alt="mining escavator" width="50%" />
+            </div>
         </React.Fragment>
     )
 }
