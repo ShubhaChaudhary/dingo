@@ -25,7 +25,7 @@ class BarChart extends React.Component {
 
     render() {
         return (
-            <Bar data={this.state.chartDa options={{
+            <Bar data={this.state.chartData} options={{
 
                 scales: {
                     yAxes: [{

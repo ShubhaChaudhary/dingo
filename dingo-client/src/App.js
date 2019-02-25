@@ -5,7 +5,7 @@ import Header from './components/Header'
 import Filter from './components/Filter'
 import BarChart from "./components/BarChart";
 import LineChart from "./components/LineChart";
-
+import Login from './components/Login'
 class App extends Component {
   render() {
     return (
@@ -21,7 +21,8 @@ class App extends Component {
 
         <div id="charts">
 
-          <LineChart />
+          {/* <BarChart /> */}
+          <Login />
         </div>
       </div>
     );
