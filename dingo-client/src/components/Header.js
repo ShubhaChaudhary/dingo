@@ -9,9 +9,9 @@ class Header extends React.Component {
             <header>
 
                 <div id='navigation'>
-                    <a href='#'>
+                    <a href='./Benchmark'>
                         <div class="button">Benchmark</div></a>
-                    <a href='#'>
+                    <a href='./Performance'>
                         <div class="button">Performance</div>
                     </a>
                 </div>
