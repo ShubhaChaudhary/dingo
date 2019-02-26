@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const dataSchema = new Schema({
-    site:String, 
-
+const dingoDataSchema = new Schema({
+   Site:String
 })
 
-module.exports = mongoose.model('Data', dataSchema)
+module.exports = mongoose.model('Data', dingoDataSchema)
