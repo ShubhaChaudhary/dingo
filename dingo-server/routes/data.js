@@ -1,54 +1,55 @@
 const express = require('express')
 const router = express.Router();
+
+
 const Data = require('../model/DataModel')
 
-<<<<<<< HEAD
-router.get('/', (req, res) => {
-    Data.find().then((site) => {
-        res.send(site)
-    }).catch(
-        error => res.status(500).json({
-            error: error.message
+router.get('/performance', (req, res) => {
+    Data.aggregate(
+        [
+        { "$match" : {
+            "Location" : "Off Contract Trucks", 
+            "Global Asset Make" : "Caterpillar", 
+            "Global Component Model" : "793C", 
+            "Global Asset Type" : "Off-Highway Truck", 
+            "Global Asset Model" : "793C", 
+            "Global Component Type" : "Transmission"
+        }
+        }, 
+        { 
+            "$group" : {
+                "_id" : {
+                    "Component Profile" : "$Component Profile", 
+                    "RemoveDate" : "$RemoveDate"
+                }, 
+                "AVG(Component Age)" : {
+                    "$avg" : "$Component Age"
+                }
+            }
+        }, 
+      
+        { 
+            "$sort" : {
+                "RemoveDate" : 1
+            }
+        }
+    ]).then((result)=>{
+            res.send(result)
+        }).catch((e)=>{
+            res.send(e)
         })
-    )
 })
-router.post('/', async (req, res) => {
-    const body = await (req.body)
-    console.log(body)
-    var data = new Data(
-        {
-            site: body.site,
-        })
-    data.save().then((doc) => {
-        res.send(doc)
-    }).catch((e) => {
-        console.log("can't save data")
-    })
-})
-=======
-router.get('/',(req,res)=>{
- Data.aggregate( [ 
-        { $match : { Site :req.body.site } },
-      {
-        $bucket: {
-          groupBy: "$Component Age",
-          boundaries: [ 0, 5000, 10000, 15000, 20000, 25000, 30000 ],
-            default:"> 30000",
-          output: {
-            "count": { $sum: 1 },
-            "age" : { $push: "$Component Age" }
-          }
-         }       
-     }
-    
-    ] ).then((result)=>{
-           console.log(res.send({result}))
-        }).catch(
-           error => res.status(500).json({
-               error: error.message
-           })
-       )
-    
-})
->>>>>>> 15afb3d52b040a73ae822508c28ae2f46ca04c9f
+// router.post('/',async (req,res)=>{
+//     const body=await (req.body)
+//     console.log(body)
+//        var data= new Data(
+//        {
+//         site:body.site,
+//        })
+//       data.save().then((doc)=>{
+//         res.send(doc)
+//        }).catch((e)=>{
+//            console.log("can't save data")
+//        })
+//    })
 module.exports = router
