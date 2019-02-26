@@ -21,14 +21,6 @@ export default () => {
             }}>
                 <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' width='200px' />
                 <form onSubmit={handleLogin}>
-                    {/* <TextField
-                        required
-                        id="username"
-                        label="User Name"
-                        margin="normal"
-                        type="text"
-                        style={{ background: 'white', 'border-radius': '5px', padding: '5px 10px' }}
-                    /> */}
 
                     <TextField
                         id="username"
