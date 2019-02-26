@@ -1,10 +1,6 @@
-const express = require('express')
-const router = express.Router();
-
-
-const Data = require('../model/DataModel')
-
-router.get('/performance', (req, res) => {
+module.exports= (Data) =>{
+//  Retrieves the Avg Component Age according to their Removal Date from mongodb Atlas
+const performance= (req, res) => {
     Data.aggregate(
         [
         { "$match" : {
@@ -38,18 +34,9 @@ router.get('/performance', (req, res) => {
         }).catch((e)=>{
             res.send(e)
         })
-})
-// router.post('/',async (req,res)=>{
-//     const body=await (req.body)
-//     console.log(body)
-//        var data= new Data(
-//        {
-//         site:body.site,
-//        })
-//       data.save().then((doc)=>{
-//         res.send(doc)
-//        }).catch((e)=>{
-//            console.log("can't save data")
-//        })
-//    })
-module.exports = router
+    }
+    
+    return {
+        performance
+    }
+}
