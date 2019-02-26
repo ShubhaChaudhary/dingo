@@ -1,40 +1,45 @@
 import React from 'react'
 import { Paper, Button, TextField } from '@material-ui/core'
+
+
 export default () => {
 
+    const handleLogin = async (event) => {
+        event.preventDefault()
+        alert('Peeka Boooo, log in feature coming soon. Please stand by :)')
+    }
     return (
 
-        <React.Fragment>
-            <Paper id="login" style={{
-                padding: '30px'
+        <div id='login-container'>
+            <Paper style={{
+                padding: '30px',
+                background: 'rgba(255, 255, 250, 0.85)',
+                'max-height': '300px'
             }}>
 
-                <form>
+                <form onSubmit={handleLogin}>
                     <TextField
                         required
-                        id="email"
-                        label="Email"
+                        id="username"
+                        label="User Name"
                         margin="normal"
-                        type="email"
+                        type="text"
                     />
 
-                    <br />
+                    <br /><br />
 
                     <TextField
                         required
                         id="password"
-                        label="password"
+                        label="Password"
                         margin="normal"
                         type="password"
                     />
-                    <br />
+                    <br /><br />
                     <Button type="submit" variant="contained" color="primary" >Login</Button>
                 </form>
             </Paper >
-            <div style={{ 'margin-left': '5%' }}>
-                <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' /><br />
-                <img src={require("../mining-excavator.png")} alt="mining escavator" width="50%" />
-            </div>
-        </React.Fragment>
+            <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' height='50px' />
+        </div>
     )
 }
