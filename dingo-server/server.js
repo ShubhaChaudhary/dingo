@@ -18,7 +18,7 @@ mongoose.connect(database, (err) => {
 //  Models
 const Data = require('./model/DataModel')
 // Routes with model passed through
-app.use('/data', require('./routes/performance')(Data))
+app.use('/data', require('./routes')(Data))
 
 app.get('/', (req, res) => {
     res.status(200).send("Dingo Dashboard ")
