@@ -1,18 +1,12 @@
 import React from 'react'
 import Filter from './Filter'
 import BarChart from './BarChart'
-import Header from './Header'
-
+// import Tabs from '@material-ui/core/Tabs';
+// import Tab from '@material-ui/core/Tab';
+// import { Link } from 'react-router-dom'
 export default () => {
   return (
     <React.Fragment>
-      <Header />
-      <div id="filter-container">
-        <h2>Filter</h2>
-        <hr />
-        <Filter />
-      </div>
-
       <BarChart />
     </React.Fragment>
   )
