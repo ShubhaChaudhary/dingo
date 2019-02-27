@@ -1,5 +1,6 @@
 import React from 'react'
 import { Paper, Button, TextField } from '@material-ui/core'
+import { white } from 'ansi-colors';
 
 
 export default () => {
@@ -13,33 +14,38 @@ export default () => {
         <div id='login-container'>
             <Paper style={{
                 padding: '30px',
-                background: 'rgba(255, 255, 250, 0.85)',
-                'max-height': '300px'
+                width: '250px',
+                background: 'rgba(67, 67, 67, 0.80', //dingo grey
+                'max-height': '300px',
+                'border-radius': '10px'
             }}>
-
+                <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' width='200px' />
                 <form onSubmit={handleLogin}>
+
                     <TextField
-                        required
                         id="username"
                         label="User Name"
-                        margin="normal"
                         type="text"
+                        name="username"
+                        margin="normal"
+                        variant="filled"
+                        style={{ background: 'rgb(254, 254, 255)', 'border-radius': '5px' }}
                     />
-
-                    <br /><br />
 
                     <TextField
-                        required
                         id="password"
                         label="Password"
-                        margin="normal"
                         type="password"
+                        name="password"
+                        margin="normal"
+                        variant="filled"
+                        style={{ background: 'rgb(254, 254, 255)', 'border-radius': '5px' }}
                     />
+
                     <br /><br />
                     <Button type="submit" variant="contained" color="primary" >Login</Button>
                 </form>
             </Paper >
-            <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' height='50px' />
         </div>
     )
 }
