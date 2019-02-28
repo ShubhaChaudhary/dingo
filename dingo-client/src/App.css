@@ -6,6 +6,9 @@
   /* flex-direction: column; */
 }
 
+h1{
+  color: aliceblue;
+}
 #filter-container{
   /* max-width: 250px; */
   background-color: #434343;
@@ -41,11 +44,7 @@
 }
 
 #login-container{
-  background-image: url('mining-excavator.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
+  background-image: url('mining-excavator16-9.png');
   display:flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -56,4 +55,9 @@
   padding-top: 15vh;
   padding-left: 15vw;
   padding-right: 15vw;
+}
+
+#content{
+  margin-left: 20px;
+  margin-top: 20px;
 }
