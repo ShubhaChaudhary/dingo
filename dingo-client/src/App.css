@@ -42,17 +42,18 @@
 
 #login-container{
   background-image: url('mining-excavator.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
   display:flex;
   justify-content: space-between;
-  position: absolute;
   flex-wrap: wrap;
   top: 0;
   bottom: 0;
   left:0;
   right:0;
-  background-size: cover;
-  background-repeat: no-repeat;
   padding-top: 15vh;
   padding-left: 15vw;
-  padding-right: 10vw;
+  padding-right: 15vw;
 }

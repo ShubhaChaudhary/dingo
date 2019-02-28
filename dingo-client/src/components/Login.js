@@ -13,13 +13,17 @@ export default () => {
 
         <div id='login-container'>
             <Paper style={{
+                position: 'absolute',
                 padding: '30px',
-                width: '250px',
-                background: 'rgba(67, 67, 67, 0.80', //dingo grey
-                'max-height': '300px',
-                'border-radius': '10px'
+                width: '500px',
+                background: 'rgba(67, 67, 67, 0.70', //dingo grey
+                'max-height': '350px',
+                'border-radius': '10px',
+                color: 'white'
             }}>
-                <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' width='200px' />
+            
+                <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' width='250px' /><br/>
+                <p>Performance and Benchmarking</p>
                 <form onSubmit={handleLogin}>
 
                     <TextField
@@ -29,7 +33,7 @@ export default () => {
                         name="username"
                         margin="normal"
                         variant="filled"
-                        style={{ background: 'rgb(254, 254, 255)', 'border-radius': '5px' }}
+                        style={{ background: 'rgb(255, 255, 255)', 'border-radius': '5px',  width: '100%' }}
                     />
 
                     <TextField
@@ -39,7 +43,7 @@ export default () => {
                         name="password"
                         margin="normal"
                         variant="filled"
-                        style={{ background: 'rgb(254, 254, 255)', 'border-radius': '5px' }}
+                        style={{ background: 'rgb(255, 255, 255)', 'border-radius': '5px', width: '100%' }}
                     />
 
                     <br /><br />
