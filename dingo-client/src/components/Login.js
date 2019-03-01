@@ -3,12 +3,14 @@ import { Paper, Button, TextField } from '@material-ui/core'
 import { white } from 'ansi-colors';
 const axios = require('axios');
 const { Issuer } = require('openid-client')
+const { Strategy } = require('openid-client')
+
 
 
 class Login extends React.Component {
     state={
     username:'',
-    password:''
+    password:'',
     }
     addingUsername=(e)=>{
     const username=e.target.value
@@ -18,8 +20,8 @@ class Login extends React.Component {
     const password=e.target.value
     this.setState(()=> ({password}))
     }
-    handleLogin = (event) => {
-    event.preventDefault()
+    handleLogin = (e) => {
+    e.preventDefault()
     let discovered = null;
     let client = null;
     let access_token = null;
@@ -113,45 +115,60 @@ class Login extends React.Component {
                 console.log('access_token: ', success.access_token);
                 console.log('expires_at: ', success.expires_at);
                 console.log('token_type: ', success.token_type);
-                console.log('**********************************************************************');
-            })
-            .then(function logout() {
-                // Not shown in the authService's metadata is the logout method.
-                // Trakka users are generally limited to 2-5 concurrent sessions.
-                // You need to logout occassionally so they don't run out of sessions.
-                // You'll be able to tell when that happens because a known-good
-                // username+password combination will start returning 'invalid_grant'
-                // to every login request.
-                if (access_token && token_type) {
-                    const logoutUrl = discovered.issuer + '/logout';
-                    console.yellow('Logging out...');
-                    console.log('logoutUrl: ', logoutUrl);
-
-                    axios.defaults.headers.get['Authorization'] = token_type + ' ' + access_token;
-                    axios.get(logoutUrl)
-                        .then(function (success) {
-                            console.green('Logged out success:');
-                            console.log('**********************************************************************');
-                        })
-                        .catch(error => {
-                            console.red('Logout error:');
-                            console.red(error);
-                            console.log('error: ', error.error);
-                            console.log('error_description: ', error.error_description);
-                            // console.log('request: ', error.request);
-                            // console.log('response: ', error.response);
-                            console.log('**********************************************************************');
-                        });
+                
+                  console.log('**********************************************************************');
+                
+                  if (access_token && token_type) {
+                    const currentSiteUrl = `https://trakkaacc.dingo.com/ws/Gemini/apiService/api/CurrentSite`
+                    axios.defaults.headers.get['Authorization'] = token_type + ' ' + access_token
+                    axios.get(currentSiteUrl).then((res)=>{
+                        console.log(res.data.Site)
+                    }).catch(e =>{
+                        console.log(e)
+                    })
                 }
+                    
+                
+                
+               console.log('**********************************')
             })
-            .catch(error => {
-                console.red('Login error:');
-                console.red(error);
-                console.log('error: ', error.error);
-                console.log('error_description: ', error.error_description);
-                console.log('**********************************************************************');
-            });
-    })
+    //         .then(function logout() {
+    //             // Not shown in the authService's metadata is the logout method.
+    //             // Trakka users are generally limited to 2-5 concurrent sessions.
+    //             // You need to logout occassionally so they don't run out of sessions.
+    //             // You'll be able to tell when that happens because a known-good
+    //             // username+password combination will start returning 'invalid_grant'
+    //             // to every login request.
+    //             if (access_token && token_type) {
+    //                 const logoutUrl = discovered.issuer + '/logout';
+    //                 console.yellow('Logging out...');
+    //                 console.log('logoutUrl: ', logoutUrl);
+
+    //                 axios.defaults.headers.get['Authorization'] = token_type + ' ' + access_token;
+    //                 axios.get(logoutUrl)
+    //                     .then(function (success) {
+    //                         console.green('Logged out success:');
+    //                         console.log('**********************************************************************');
+    //                     })
+    //                     .catch(error => {
+    //                         console.red('Logout error:');
+    //                         console.red(error);
+    //                         console.log('error: ', error.error);
+    //                         console.log('error_description: ', error.error_description);
+    //                         // console.log('request: ', error.request);
+    //                         // console.log('response: ', error.response);
+    //                         console.log('**********************************************************************');
+    //                     });
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.red('Login error:');
+    //             console.red(error);
+    //             console.log('error: ', error.error);
+    //             console.log('error_description: ', error.error_description);
+    //             console.log('**********************************************************************');
+    //         });
+     })
     
     }
     render(){
@@ -188,6 +205,7 @@ class Login extends React.Component {
     />
     <br /><br />
     <Button type="submit" variant="contained" color="primary" >Login</Button>
+    <Button type="submit" variant="contained" color="primary" >Logout</Button>
     </form>
     </Paper >
     </div>
