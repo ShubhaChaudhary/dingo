@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
-import logo from './logo.svg';
 import './App.css';
-// import Header from './components/Header'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Benchmark from './components/Benchmark'
 import Performance from './components/Performance'
+import Header from './components/Header'
+import Filter from './components/Filter';
+import TabBar from "./components/TabBar";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header />
+        <Filter />
+
         <Router>
-          <React.Fragment>
+          <div id='content'>
+            <TabBar />
             <Route exact path="/" component={Login} />
-            <Route exact path="/Benchmark" component={Benchmark} />
-            <Route exact path="/Performance" component={Performance} />
-          </React.Fragment>
+            <Route exact path="/benchmark" component={Benchmark} />
+            <Route exact path="/performance" component={Performance} />
+          </div>
         </Router>
       </div>
     );
@@ -24,3 +29,4 @@ class App extends Component {
 }
 
 export default App;
+
