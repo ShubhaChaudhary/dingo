@@ -35,7 +35,7 @@ h1{
 #charts{
   padding-top: 20px;
   padding-left: 20px;
-  max-width: 70%;
+  /* max-width: 70%; */
 }
 
 .chart nvd3-svg{
