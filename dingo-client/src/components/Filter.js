@@ -1,8 +1,14 @@
 import React from "react";
-import { from } from "rxjs";
+import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 
 class Filter extends React.Component {
+    userLogout() {
+        localStorage.clear();
+        document.location.reload()
+
+    }
 
     render() {
         return (
@@ -60,9 +66,11 @@ class Filter extends React.Component {
 
                     <br /><br />
 
-                    <button type="submit">Filter</button>
+                    <Button variant="contained" color="primary" >Filter</Button>
 
                 </from>
+                <br /><br />
+                <Button onClick={this.userLogout} variant="contained" color="primary" >Logout</Button>
             </div>
         )
     }
