@@ -1,17 +1,18 @@
+
 import React from 'react'
 import { Paper, Button, TextField } from '@material-ui/core'
+import axios from 'axios'
+import { Issuer } from 'openid-client'
+import { Strategy } from 'openid-client'
 import store from '../redux/store'
 import { setToken, setTokenType } from '../redux/action'
 
-
-import axios from 'axios'
-import Issuer from 'openid-client'
 
 
 class Login extends React.Component {
     state = {
         username: '',
-        password: ''
+        password: '',
     }
     addingUsername = (e) => {
         const username = e.target.value
@@ -21,8 +22,8 @@ class Login extends React.Component {
         const password = e.target.value
         this.setState(() => ({ password }))
     }
-    handleLogin = (event) => {
-        event.preventDefault()
+    handleLogin = (e) => {
+        e.preventDefault()
         let discovered = null;
         let client = null;
         let access_token = null;
@@ -111,15 +112,36 @@ class Login extends React.Component {
                         access_token = success.access_token;
                         token_type = success.token_type;
 
-                        store.dispatch(setToken(access_token))
-                        store.dispatch(setTokenType(token_type))
+                        // store.dispatch(setToken(access_token))
+                        // store.discovered(setTokenType(token_type))
 
+                        localStorage.setItem('token', access_token)
+                        localStorage.setItem('tokenType', token_type)
+                        document.location.reload()
                         console.green('Login success:');
                         // console.log(success);
                         console.log('access_token: ', success.access_token);
                         console.log('expires_at: ', success.expires_at);
-                        console.log('token_type: ', success.token_type, token_type, store.getState().tokenType);
+                        console.log('token_type: ', success.token_type);
+
                         console.log('**********************************************************************');
+
+                        if (access_token && token_type) {
+                            const currentSiteUrl = `https://trakkaacc.dingo.com/ws/Gemini/apiService/api/CurrentSite`
+                            axios.defaults.headers.get['Authorization'] = token_type + ' ' + access_token
+                            axios.get(currentSiteUrl).then((res) => {
+                                console.log(res.data.Site)
+                            }).catch(e => {
+                                console.log(e)
+                            })
+
+
+
+                        }
+
+
+
+                        console.log('**********************************')
                     })
                     .then(function logout() {
                         // Not shown in the authService's metadata is the logout method.
@@ -150,13 +172,13 @@ class Login extends React.Component {
                                 });
                         }
                     })
-                    .catch(error => {
-                        console.red('Login error:');
-                        console.red(error);
-                        console.log('error: ', error.error);
-                        console.log('error_description: ', error.error_description);
-                        console.log('**********************************************************************');
-                    });
+                //         .catch(error => {
+                //             console.red('Login error:');
+                //             console.red(error);
+                //             console.log('error: ', error.error);
+                //             console.log('error_description: ', error.error_description);
+                //             console.log('**********************************************************************');
+                //         });
             })
 
     }
@@ -201,3 +223,4 @@ class Login extends React.Component {
     }
 }
 export default Login
+

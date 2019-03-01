@@ -30,5 +30,5 @@ const reducer = (state, action) => {
     }
 }
 
-export default createStore(reducer, initialSate)
+export default createStore(reducer, intialState)
 
