@@ -1,8 +1,11 @@
 import React from 'react'
 import { Paper, Button, TextField } from '@material-ui/core'
-import { white } from 'ansi-colors';
-const axios = require('axios');
-const { Issuer } = require('openid-client')
+import store from '../redux/store'
+import { setToken, setTokenType } from '../redux/action'
+
+
+import axios from 'axios'
+import Issuer from 'openid-client'
 
 
 class Login extends React.Component {
@@ -70,29 +73,29 @@ class Login extends React.Component {
                 console.log('client.metadata: ', client.metadata);
                 console.log('**********************************************************************');
             })
-            .then(function tryBadLogin() {
-                // Login with bad credentials...
-                const loginSettings = {
-                    grant_type: 'password',
-                    scope: 'email openid profile trakkaApi',
-                    username: 'hello',
-                    password: 'world'
-                }
-                client.grant(loginSettings)
-                    .then(function (success) {
-                        // Shouldn't get here because of invalid credentials.
-                        console.green('Login success:');
-                        console.log('success: ', success);
-                        console.log('**********************************************************************');
-                    })
-                    .catch(error => {
-                        console.red('Login error: ');
-                        console.red(error);
-                        console.log('error: ', error.error);
-                        console.log('error_description: ', error.error_description);
-                        console.log('**********************************************************************');
-                    });
-            })
+            // .then(function tryBadLogin() {
+            //     // Login with bad credentials...
+            //     const loginSettings = {
+            //         grant_type: 'password',
+            //         scope: 'email openid profile trakkaApi',
+            //         username: 'hello',
+            //         password: 'world'
+            //     }
+            //     client.grant(loginSettings)
+            //         .then(function (success) {
+            //             // Shouldn't get here because of invalid credentials.
+            //             console.green('Login success:');
+            //             console.log('success: ', success);
+            //             console.log('**********************************************************************');
+            //         })
+            //         .catch(error => {
+            //             console.red('Login error: ');
+            //             console.red(error);
+            //             console.log('error: ', error.error);
+            //             console.log('error_description: ', error.error_description);
+            //             console.log('**********************************************************************');
+            //         });
+            // })
             .then(function trySuccessfulLogin() {
                 // Login with good credentials...
                 const loginSettings = {
@@ -108,11 +111,14 @@ class Login extends React.Component {
                         access_token = success.access_token;
                         token_type = success.token_type;
 
+                        store.dispatch(setToken(access_token))
+                        store.dispatch(setTokenType(token_type))
+
                         console.green('Login success:');
                         // console.log(success);
                         console.log('access_token: ', success.access_token);
                         console.log('expires_at: ', success.expires_at);
-                        console.log('token_type: ', success.token_type);
+                        console.log('token_type: ', success.token_type, token_type, store.getState().tokenType);
                         console.log('**********************************************************************');
                     })
                     .then(function logout() {
