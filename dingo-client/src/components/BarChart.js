@@ -24,7 +24,7 @@ class BarChart extends React.Component {
     // }
 
 
-    datum  = [
+    datum = [
         {
             key: "Cumulative Return",
             values: [
@@ -69,7 +69,7 @@ class BarChart extends React.Component {
     render() {
 
         return (
-            <NVD3Chart id="barChart" type="discreteBarChart" datum={this.datum} x="label" y="value"/>
+            <NVD3Chart id="barChart" type="discreteBarChart" datum={this.datum} x="label" y="value" />
         )
     }
 }
