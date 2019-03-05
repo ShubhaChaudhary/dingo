@@ -8,13 +8,13 @@ import { Provider } from "react-redux";
 import reducers from './redux/reducers'
 import thunk from "redux-thunk"
 
-const store= createStore(reducers, {
-    auth: {access_token: localStorage.getItem('token'),token_type: localStorage.getItem('token_type')}
-},applyMiddleware(thunk))
+const store = createStore(reducers, {
+    auth: { access_token: localStorage.getItem('token'), token_type: localStorage.getItem('token_type'), site: localStorage.getItem('site') }
+}, applyMiddleware(thunk))
 
 ReactDOM.render(
-    <Provider store= {store}>
-    <App />
+    <Provider store={store}>
+        <App />
     </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

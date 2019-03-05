@@ -46,13 +46,13 @@ export function setTokenType(tokenType) {
 
 
 
-export function login ({username, password}){
-    return function(dispatch){
+export function login({ username, password }) {
+    return function (dispatch) {
         let discovered = null;
         let client = null;
         let access_token = null;
         let token_type = null;
-       
+
 
         console.green = function (text) {
             console.log('\x1b[32m%s\x1b[0m', text);
@@ -112,61 +112,62 @@ export function login ({username, password}){
                         token_type = success.token_type;
                         localStorage.setItem('token', access_token)
                         localStorage.setItem('token_type', token_type)
-                        if (access_token && token_type) {
-                            const currentSiteUrl = `https://trakkaacc.dingo.com/ws/Gemini/apiService/api/CurrentSite`
-                            axios.defaults.headers.get['Authorization'] = token_type + ' ' + access_token
-                            axios.get(currentSiteUrl).then((res) => {
-                                const site =res.data.Site
-                                dispatch({
-                                    type: 'AUTH_USER',
-                                    payload: {access_token,
-                                              token_type,
-                                              site
-                                             }
-        
-                                
-                                    })
-                            }).catch(error => {
-                                dispatch({
-                                    type: 'AUTH_ERROR',
-                                    payload: `UserInfo is not valid: ${error}`
-                                    })
+
+                        const currentSiteUrl = `https://trakkaacc.dingo.com/ws/Gemini/apiService/api/CurrentSite`
+                        axios.defaults.headers.get['Authorization'] = token_type + ' ' + access_token
+
+                        axios.get(currentSiteUrl).then((res) => {
+                            const site = res.data.Site
+                            localStorage.setItem('site', site)
+
+                            dispatch({
+                                type: 'AUTH_USER',
+                                payload: {
+                                    access_token,
+                                    token_type,
+                                    site
+                                }
                             })
 
-
-
-                        }
-                          
-                        
+                        }).then(() => {
+                            document.location.reload()
                         })
 
+                    }).catch(error => {
+                        dispatch({
+                            type: 'AUTH_ERROR',
+                            payload: `UserInfo is not valid: ${error}`
+                        })
+                    })
 
-                })
+
+
+            })
 
     }
 }
 
 export function logout() {
-    const token_type= localStorage.getItem('token_type')
-    const access_token=localStorage.getItem('token')
+    const token_type = localStorage.getItem('token_type')
+    const access_token = localStorage.getItem('token')
     localStorage.removeItem('token_type')
     localStorage.removeItem('token')
-    return function(dispatch) {
-        const logoutUrl='https://trakkaacc.dingo.com/ws/gemini/authservice/logout'
+    return function (dispatch) {
+        const logoutUrl = 'https://trakkaacc.dingo.com/ws/gemini/authservice/logout'
         axios.defaults.headers.get['Authorization'] = token_type + ' ' + access_token
-        axios.get( logoutUrl).then(logout =>{
+        axios.get(logoutUrl).then(logout => {
             dispatch({
                 type: 'AUTH_USER',
-                payload:''
+                payload: ''
 
             })
         }).catch(error => {
             dispatch({
                 type: 'AUTH_ERROR',
                 payload: `UserInfo is not valid: ${error}`
-                })
+            })
         })
     }
-}               
-            
+}
+
 

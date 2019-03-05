@@ -11,40 +11,20 @@ class LineChart extends React.Component {
         {
           key: 'test',
           "bar": true,
-          "color": "#ccf",
+          "color": "#f44253",
           values: [
             { _id: 0, count: 200 },
             { _id: 5000, count: 350 },
             { _id: 10000, count: 3000 },
             { _id: 15000, count: 2350 },
             { _id: 20000, count: 1500 },
+            { _id: 25000, count: 1000 },
+            { _id: 30000, count: 900 },
           ]
         }]
     }
   }
 
-  // datum = function () {
-  //   var sin = [],
-  //     cos = [];
-
-  //   for (var i = 0; i < 100; i++) {
-  //     sin.push({ x: i, y: Math.sin(i / 10) });
-  //     cos.push({ x: i, y: .5 * Math.cos(i / 10) });
-  //   }
-
-  //   return [
-  //     {
-  //       values: sin,
-  //       key: 'Sine Wave',
-  //       color: '#ff7f0e'
-  //     },
-  //     {
-  //       values: cos,
-  //       key: 'Cosine Wave',
-  //       color: '#2ca02c'
-  //     }
-  //   ];
-  // }
 
   // This async function fetches and pupulates the chart on the later date.
   // It fixed the bug where you had to press twice on the tab to get chart pupulated.
