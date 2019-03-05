@@ -30,22 +30,6 @@ export function setFilter(filter) {
     }
 }
 
-export function setToken(token) {
-    return {
-        type: 'set_token',
-        token
-    }
-}
-
-export function setTokenType(tokenType) {
-    return {
-        type: 'set_tokenType',
-        tokenType
-    }
-}
-
-
-
 export function login({ username, password }) {
     return function (dispatch) {
         let discovered = null;

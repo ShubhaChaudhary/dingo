@@ -9,7 +9,7 @@ import reducers from './redux/reducers'
 import thunk from "redux-thunk"
 
 const store = createStore(reducers, {
-    auth: { access_token: localStorage.getItem('token'), token_type: localStorage.getItem('token_type'), site: localStorage.getItem('site') }
+    auth: { access_token: localStorage.getItem('token'), token_type: localStorage.getItem('token_type'), site: localStorage.getItem('site') },
 }, applyMiddleware(thunk))
 
 ReactDOM.render(
