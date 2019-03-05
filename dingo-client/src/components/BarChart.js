@@ -1,8 +1,7 @@
 import React from 'react'
 import NVD3Chart from 'react-nvd3'
 import axios from 'axios'
-import store from '../redux/store'
-import { setUserBenchmarkData } from '../redux/action'
+
 
 
 class BarChart extends React.Component {
