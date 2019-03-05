@@ -45,7 +45,9 @@ h1{
 
 #login-container{
   background-image: url('mining-excavator16-9.png');
+  height: 100vh;
   display:flex;
+  background-position: center;
   justify-content: space-between;
   position: absolute;
   flex-wrap: wrap;
