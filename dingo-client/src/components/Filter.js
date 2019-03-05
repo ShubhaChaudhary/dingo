@@ -1,13 +1,15 @@
 import React from "react";
 import { Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux'
+import * as actions from '../redux/action'
 
 
 class Filter extends React.Component {
-    userLogout() {
-        localStorage.clear();
+    userLogout=()=> {
+        console.log(this.props.logout())
+        // this.props.logout()
         document.location.reload()
-
     }
 
     render() {
@@ -76,4 +78,4 @@ class Filter extends React.Component {
     }
 }
 
-export default Filter
+export default connect(null,actions)(Filter)
