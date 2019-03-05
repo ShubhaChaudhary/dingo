@@ -7,7 +7,21 @@ class LineChart extends React.Component {
     super(props)
 
     this.state = {
-      datum: []
+      datum: [
+        {
+          key: 'test',
+          "bar": true,
+          "color": "#f44253",
+          values: [
+            { _id: 0, count: 200 },
+            { _id: 5000, count: 350 },
+            { _id: 10000, count: 3000 },
+            { _id: 15000, count: 2350 },
+            { _id: 20000, count: 1500 },
+            { _id: 25000, count: 1000 },
+            { _id: 30000, count: 900 },
+          ]
+        }]
     }
   }
 
@@ -53,7 +67,7 @@ class LineChart extends React.Component {
 
 
     return (
-      <NVD3Chart id="lineChart" type="lineChart" datum={this.state.datum} x="_id" y="count" />
+      <NVD3Chart id="lineChart" type="linePlusBarChart" datum={this.state.datum} x="_id" y="count" />
     )
   }
 }
