@@ -1,17 +1,17 @@
-import { createStore } from 'redux'
+// import { createStore } from 'redux'
 
 
-const intialState = {
-    user: {}, // user data
+// const intialState = {
+//     user: {}, // user data
 
-    token: '',
-    tokenType: '',
+//     token: '',
+//     tokenType: '',
 
-    filter: {},            // FIlter component data,
-    userBenchmarkData: {}, // This is used to plot users data on charts
-    dingoBenchmarkData: {} // This is dingo comparion data 
+//     filter: {},            // FIlter component data,
+//     userBenchmarkData: {}, // This is used to plot users data on charts
+//     dingoBenchmarkData: {} // This is dingo comparion data 
 
-}
+// }
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -30,5 +30,5 @@ const reducer = (state, action) => {
     }
 }
 
-export default createStore(reducer, intialState)
+// export default createStore(reducer, intialState)
 
