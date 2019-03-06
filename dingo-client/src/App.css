@@ -52,10 +52,10 @@ h1{
   display:flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  top: 0;
+  /* top: 0;
   bottom: 0;
   left:0;
-  right:0;
+  right:0; */
   padding-top: 15vh;
   padding-left: 15vw;
   padding-right: 10vw;
