@@ -7,18 +7,20 @@ import Performance from './components/Performance'
 import Header from './components/Header'
 import Filter from './components/Filter';
 import TabBar from "./components/TabBar";
+import { connect } from 'react-redux'
 import { relativeTimeRounding } from 'moment';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
-        <Header />
-        <Filter />
+        {this.props.access_token && <Header />}
+        {this.props.access_token && <Filter/>}
 
         <Router>
           <div id='content'>
-            <TabBar />
+          {this.props.access_token &&  <TabBar />}
 
             <Route exact path='/' render={() => {
               if (localStorage.getItem('token')) {
@@ -53,5 +55,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  access_token: state.auth.access_token,
+  
+})
+export default connect(mapStateToProps)(App);
 
