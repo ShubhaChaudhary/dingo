@@ -6,6 +6,11 @@ import * as actions from '../redux/action'
 import auth from '../redux/reducers/auth'
 
 class Filter extends React.Component {
+    componentDidMount(){
+        if(this.props.access_token){
+            
+        }
+    }
     userLogout = () => {
         console.log(this.props.logout())
         // this.props.logout()
@@ -76,6 +81,7 @@ class Filter extends React.Component {
     }
 }
 const mapStateToProps = state => ({
-    site: state.auth.site
+    site: state.auth.site,
+    access_token:state.auth.access_token 
 })
 export default connect(mapStateToProps, actions)(Filter)
