@@ -1,7 +1,7 @@
 import React from 'react'
-import Filter from './Filter'
+// import Filter from './Filter'
 import LineChart from './LineChart'
-import Header from './Header'
+// import Header from './Header'
 
 export default () => {
   return (

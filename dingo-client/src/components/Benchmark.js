@@ -1,5 +1,5 @@
 import React from 'react'
-import Filter from './Filter'
+// import Filter from './Filter'
 import BarChart from './BarChart'
 // import Tabs from '@material-ui/core/Tabs';
 // import Tab from '@material-ui/core/Tab';

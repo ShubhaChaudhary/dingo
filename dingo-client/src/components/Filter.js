@@ -1,8 +1,21 @@
 import React from "react";
-import { from } from "rxjs";
-
+import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import * as actions from '../redux/action'
+import auth from '../redux/reducers/auth'
 
 class Filter extends React.Component {
+    componentDidMount(){
+        if(this.props.access_token){
+            
+        }
+    }
+    userLogout = () => {
+        console.log(this.props.logout())
+        // this.props.logout()
+        document.location.reload()
+    }
 
     render() {
         return (
@@ -13,9 +26,7 @@ class Filter extends React.Component {
                     <label for="site">Site:</label><br />
                     <select id="site">
 
-                        <option>Site 1</option>
-                        <option>Site 2</option>
-                        <option>Site 3</option>
+                        <option>{this.props.site}</option>
                     </select>
 
                     <br /><br />
@@ -60,12 +71,17 @@ class Filter extends React.Component {
 
                     <br /><br />
 
-                    <button type="submit">Filter</button>
+                    <Button variant="contained" color="primary" >Filter</Button>
 
                 </from>
+                <br /><br />
+                <Button onClick={this.userLogout} variant="contained" color="primary" >Logout</Button>
             </div>
         )
     }
 }
-
-export default Filter
+const mapStateToProps = state => ({
+    site: state.auth.site,
+    access_token:state.auth.access_token 
+})
+export default connect(mapStateToProps, actions)(Filter)
