@@ -30,6 +30,13 @@ export function setFilter(filter) {
     }
 }
 
+export function setYearRange(value) {
+    return {
+        type: 'YEAR_RANGE',
+        value
+    }
+}
+
 export function login({ username, password }) {
     return function (dispatch) {
         let discovered = null;
