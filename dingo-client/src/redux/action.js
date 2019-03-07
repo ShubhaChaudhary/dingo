@@ -113,9 +113,24 @@ export function login({ username, password }) {
                                 }
                             })
 
-                        }).then(() => {
-                            document.location.reload()
                         })
+                        // retreiving related data to the current site
+                        axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') })
+                            .then((res) => {
+                                let filterData = res.data
+                                localStorage.setItem('filterData', filterData)
+
+                                dispatch({
+                                    type: 'AUTH_USER',
+                                    payload: {
+                                        filterData
+                                    }
+                                })
+                            }).then(() => {
+                                document.location.reload()
+                            }).catch(error => {
+                                console.log('waiting for filter data', error)
+                            })
 
                     }).catch(error => {
                         dispatch({
