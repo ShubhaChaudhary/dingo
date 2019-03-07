@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../redux/action'
 import auth from '../redux/reducers/auth'
+import moment from "moment";
+import InputRange from 'react-input-range'
+import 'react-input-range/lib/css/index.css'
 
 class Filter extends React.Component {
     componentDidMount(){
@@ -16,8 +19,7 @@ class Filter extends React.Component {
         // this.props.logout()
         document.location.reload()
     }
-
-    render() {
+   render() {
         return (
             <div id="filter-container">
                 <h2>Filter</h2>
@@ -70,7 +72,19 @@ class Filter extends React.Component {
                     </select>
 
                     <br /><br />
-
+                    <form className="form">
+                    <label for="component-model">Year Range selctor:</label><br />
+                    <br /><br />
+                    <InputRange
+                       draggableTrack
+                        maxValue={moment().format('YYYY')}
+                        minValue={2000}
+                        onChange={value => this.props.setYearRange(value)}
+                        onChangeComplete={value => console.log(value)}
+                        value={this.props.year} />
+                   
+                    </form>
+                    <br /><br />
                     <Button variant="contained" color="primary" >Filter</Button>
 
                 </from>
@@ -80,8 +94,12 @@ class Filter extends React.Component {
         )
     }
 }
+
 const mapStateToProps = state => ({
     site: state.auth.site,
-    access_token:state.auth.access_token 
+    access_token:state.auth.access_token,
+    year:state.yearpicker.year,
+    
 })
 export default connect(mapStateToProps, actions)(Filter)
+
