@@ -22,7 +22,7 @@ class Filter extends React.Component {
         document.location.reload()
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault()
 
         const form = event.target
@@ -44,6 +44,7 @@ class Filter extends React.Component {
     }
 
     render() {
+        console.log(this.props.assetMake)
         return (
             <div id="filter-container">
                 <h2>Filter</h2>
@@ -60,57 +61,58 @@ class Filter extends React.Component {
                     <br /><br />
                     <label for="location">Location:</label><br />
                     <select id="location">
-                        <option>Location 1</option>
-                        <option>Location 2</option>
-                        <option>Location 3</option>
+                        {this.props.location.map((local, index) => {
+                            return <option key={index}>{local}</option>
+                        })}
                     </select>
 
                     <br /><br />
                     <label for="assetMake">Asset Make:</label><br />
                     <select id="assetMake">
-                        <option>Make 1</option>
-                        <option>Make 2</option>
-                        <option>Make 3</option>
+                        {this.props.assetMake.map((local, index) => {
+                            return <option key={index}>{local}</option>
+                        })}
                     </select>
 
                     <br /><br />
                     <label for="assetModel">Asset Model:</label><br />
                     <select id="assetModel">
-                        <option>AAAA</option>
-                        <option>BBBB</option>
-                        <option>CCCC</option>
+                        {this.props.assetModel.map((local, index) => {
+                            return <option key={index}>{local}</option>
+                        })}
                     </select>
 
                     <br /><br />
                     <label for="assetType">Asset Type:</label><br />
                     <select id="assetType">
-                        <option>AAAA</option>
-                        <option>BBBB</option>
-                        <option>CCCC</option>
+                        {this.props.assetType.map((local, index) => {
+                            return <option key={index}>{local}</option>
+                        })}
+
                     </select>
 
-                    <br /><br />
+                    {/* <br /><br />
                     <label for="componenMake">Component Type:</label><br />
                     <select id="componenMake">
                         <option>ABC</option>
                         <option>CDAl</option>
                         <option>DSA</option>
-                    </select>
+                    </select> */}
 
                     <br /><br />
                     <label for="componentModel">Component Model:</label><br />
                     <select id="componentModel">
-                        <option>DDDD</option>
-                        <option>EEEE</option>
-                        <option>FFFF</option>
+                        {this.props.componentModel.map((local, index) => {
+                            return <option key={index}>{local}</option>
+                        })}
                     </select>
 
                     <br /><br />
                     <label for="componentType">Component Type:</label><br />
                     <select id="componentType">
-                        <option>Engine</option>
-                        <option>Drill</option>
-                        <option>Drive Train</option>
+                        {this.props.componentType.map((local, index) => {
+                            return <option key={index}>{local}</option>
+                        })}
                     </select>
 
                     <br /><br />
@@ -143,6 +145,13 @@ const mapStateToProps = state => ({
     site: state.auth.site,
     access_token: state.auth.access_token,
     year: state.yearpicker.year,
+
+    location: state.userdata.filter[0].Location,
+    assetMake: state.userdata.filter[0]["Global Asset Make"],
+    assetModel: state.userdata.filter[0]["Global Asset Model"],
+    assetType: state.userdata.filter[0]["Global Asset Type"],
+    componentType: state.userdata.filter[0]["Global Component Type"],
+    componentModel: state.userdata.filter[0]["Global Component Model"],
 
 })
 export default connect(mapStateToProps, actions)(Filter)

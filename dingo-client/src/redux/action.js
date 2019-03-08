@@ -125,10 +125,10 @@ export function login({ username, password }) {
                         axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') })
                             .then((res) => {
                                 let filterData = res.data
-                                localStorage.setItem('filterData', filterData)
-
+                                console.log(filterData)
+                                localStorage.setItem('filterData', JSON.stringify(filterData))
                                 dispatch({
-                                    type: 'AUTH_USER',
+                                    type: 'set_filter',
                                     payload: {
                                         filterData
                                     }
@@ -138,6 +138,8 @@ export function login({ username, password }) {
                             }).catch(error => {
                                 console.log('waiting for filter data', error)
                             })
+
+
 
                     }).catch(error => {
                         dispatch({
