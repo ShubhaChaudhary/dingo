@@ -1,5 +1,35 @@
 module.exports = (Data) => {
-    //  Retrieves the Component Age and total count from mongodb Atlas
+    // Retrieves the filter field data for particular site
+   const filter = (req, res) =>{
+    Data.aggregate([
+                { 
+                    "$match" : {
+                        "Site" : "Newmont Nevada"
+                    }
+                },
+                {    $group: {
+                                _id: null,
+                              "Location"  : {$addToSet: '$Location'},
+                              "Global Asset Make": {$addToSet: "$Global Asset Make"},
+                              "Global Asset Model": {$addToSet: "$Global Asset Model"},
+                              "Global Asset Type": {$addToSet: "$Global Asset Type"},
+                              "Global Component Type": {$addToSet: '$Global Component Type'},
+                              "Global Component Model":{$addToSet:'$Global Component Model'}
+                     }
+                }
+            ]).then((result) => {
+            res.send(result)
+            }).catch((e) => {
+            res.send(e)
+            })
+
+
+   }
+
+
+
+
+    //  Retrieves the Component Age and total count (last three year by default)from mongodb Atlas
     const dashboard =  (req, res) => {
        Data.aggregate([
         { $match:  {
@@ -70,6 +100,7 @@ module.exports = (Data) => {
     }
 
     return {
+        filter,
         dashboard,
         performance
     }
