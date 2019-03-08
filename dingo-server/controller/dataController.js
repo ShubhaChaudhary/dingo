@@ -1,10 +1,11 @@
 module.exports = (Data) => {
     // Retrieves the filter field data for particular site
    const filter = (req, res) =>{
+       
     Data.aggregate([
                 { 
                     "$match" : {
-                        "Site" : "Newmont Nevada"
+                        "Site" : req.body.Site
                     }
                 },
                 {    $group: {
