@@ -1,10 +1,22 @@
 module.exports = (Data) => {
     // Retrieves the filter field data for particular site
     const filter = (req, res) => {
+
         Data.aggregate([
             {
                 "$match": {
-                    "Site": "Newmont Nevada"
+                    "Site": req.body.Site
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    "Location": { $addToSet: '$Location' },
+                    "Global Asset Make": { $addToSet: "$Global Asset Make" },
+                    "Global Asset Model": { $addToSet: "$Global Asset Model" },
+                    "Global Asset Type": { $addToSet: "$Global Asset Type" },
+                    "Global Component Type": { $addToSet: '$Global Component Type' },
+                    "Global Component Model": { $addToSet: '$Global Component Model' }
                 }
             },
             {
