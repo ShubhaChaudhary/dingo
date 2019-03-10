@@ -44,7 +44,6 @@ class Filter extends React.Component {
     }
 
     render() {
-        console.log(this.props.assetMake)
         return (
             <div id="filter-container">
                 <h2>Filter</h2>
@@ -61,34 +60,33 @@ class Filter extends React.Component {
                     <br /><br />
                     <label for="location">Location:</label><br />
                     <select id="location">
-                        {this.props.location.map((local, index) => {
-                            return <option key={index}>{local}</option>
+                        {this.props.location.map((value, index) => {
+                            return (<option key={index}>{value}</option>)
                         })}
                     </select>
 
                     <br /><br />
                     <label for="assetMake">Asset Make:</label><br />
                     <select id="assetMake">
-                        {this.props.assetMake.map((local, index) => {
-                            return <option key={index}>{local}</option>
+                        {this.props.assetMake.map((value, index) => {
+                            return (<option key={index}>{value}</option>)
                         })}
                     </select>
 
                     <br /><br />
                     <label for="assetModel">Asset Model:</label><br />
                     <select id="assetModel">
-                        {this.props.assetModel.map((local, index) => {
-                            return <option key={index}>{local}</option>
+                        {this.props.assetModel.map((value, index) => {
+                            return (<option key={index}>{value}</option>)
                         })}
                     </select>
 
                     <br /><br />
                     <label for="assetType">Asset Type:</label><br />
                     <select id="assetType">
-                        {this.props.assetType.map((local, index) => {
-                            return <option key={index}>{local}</option>
+                        {this.props.assetType.map((value, index) => {
+                            return (<option key={index}>{value}</option>)
                         })}
-
                     </select>
 
                     {/* <br /><br />
@@ -102,16 +100,16 @@ class Filter extends React.Component {
                     <br /><br />
                     <label for="componentModel">Component Model:</label><br />
                     <select id="componentModel">
-                        {this.props.componentModel.map((local, index) => {
-                            return <option key={index}>{local}</option>
+                        {this.props.componentModel.map((value, index) => {
+                            return (<option key={index}>{value}</option>)
                         })}
                     </select>
 
                     <br /><br />
                     <label for="componentType">Component Type:</label><br />
                     <select id="componentType">
-                        {this.props.componentType.map((local, index) => {
-                            return <option key={index}>{local}</option>
+                        {this.props.componentType.map((value, index) => {
+                            return (<option key={index}>{value}</option>)
                         })}
                     </select>
 
@@ -146,12 +144,12 @@ const mapStateToProps = state => ({
     access_token: state.auth.access_token,
     year: state.yearpicker.year,
 
-    location: state.userdata.filter[0].Location,
-    assetMake: state.userdata.filter[0]["Global Asset Make"],
-    assetModel: state.userdata.filter[0]["Global Asset Model"],
-    assetType: state.userdata.filter[0]["Global Asset Type"],
-    componentType: state.userdata.filter[0]["Global Component Type"],
-    componentModel: state.userdata.filter[0]["Global Component Model"],
+    location: state.userdata.filter[0].Location[0],
+    assetMake: state.userdata.filter[0]["Global Asset Make"][0],
+    assetModel: state.userdata.filter[0]["Global Asset Model"][0],
+    assetType: state.userdata.filter[0]["Global Asset Type"][0],
+    componentType: state.userdata.filter[0]["Global Component Type"][0],
+    componentModel: state.userdata.filter[0]["Global Component Model"][0],
 
 })
 export default connect(mapStateToProps, actions)(Filter)
