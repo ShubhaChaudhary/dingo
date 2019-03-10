@@ -18,17 +18,6 @@ module.exports = (Data) => {
                     "Global Component Type": { $addToSet: '$Global Component Type' },
                     "Global Component Model": { $addToSet: '$Global Component Model' }
                 }
-            },
-            {
-                $group: {
-                    _id: null,
-                    "Location": { $addToSet: '$Location' },
-                    "Global Asset Make": { $addToSet: "$Global Asset Make" },
-                    "Global Asset Model": { $addToSet: "$Global Asset Model" },
-                    "Global Asset Type": { $addToSet: "$Global Asset Type" },
-                    "Global Component Type": { $addToSet: '$Global Component Type' },
-                    "Global Component Model": { $addToSet: '$Global Component Model' }
-                }
             }
         ]).then((result) => {
             res.send(result)
