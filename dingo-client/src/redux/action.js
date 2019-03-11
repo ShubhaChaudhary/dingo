@@ -23,12 +23,18 @@ export function setDingoBenchmarkData(dingoBenchmarkData) {
     }
 }
 
-export function setFilter(filter) {
-    return {
-        type: 'set_filter',
-        filter
-    }
-}
+export const fetchFilterData = (site) => async dispatch => {
+    
+    const data= {"Site": site }
+    
+    const filterData = await axios.post('http://localhost:3001/data/filter',data)
+    const datafilter=filterData.data[0];
+    console.log(datafilter)
+    dispatch({
+      type: "FILTER_DATA",
+     datafilter
+    });
+  };
 
 export function setYearRange(value) {
     return {
@@ -127,12 +133,16 @@ export function login({ username, password }) {
                             type: 'AUTH_ERROR',
                             payload: `UserInfo is not valid: ${error}`
                         })
-                    }).then(() => {
-                        axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') }).then((res) => {
-                            let filterData = res.data
-                            console.log(filterData)
-                            localStorage.setItem('filterData', JSON.stringify(filterData))
-                        })
+                    // }).then(() => {
+                    //     axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') }).then((res) => {
+                    //         let filterData = res.data
+                    //         console.log(filterData)
+                    //         localStorage.setItem('filterData', JSON.stringify(filterData))
+                    //         dispatch({
+                    //             type: 'set_filter',
+                    //              filter
+                    //         })
+                    //     })
                     })
 
 
