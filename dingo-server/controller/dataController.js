@@ -33,8 +33,9 @@ module.exports = (Data) => {
 
 
     //  Retrieves the Component Age and total count (last three year by default)from mongodb Atlas
-    const dashboard = (req, res) => {
-        Data.aggregate([
+    const dashboard = async (req, res) => {
+        // User Site data
+        let siteData = await Data.aggregate([
             {
                 $match: {
 
@@ -53,15 +54,32 @@ module.exports = (Data) => {
                     }
                 }
             }
-        ]).then((result) => {
-            res.send(result)
-        }).catch((e) => {
-            res.send(e)
-        })
+        ])
 
 
+        let dingoData = await Data.aggregate([
 
+            {
+                '$match': {
+                    'Site': { '$ne': 'Newmount Nevada' },
+                    "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                }
+            },
 
+            {
+                $bucket: {
+                    groupBy: "$Component Age",
+                    boundaries: [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000, 22000, 24000, 26000, 28000, 30000, 32000, 34000, 36000, 38000, 40000, 42000, 44000, 46000, 48000, 50000],
+                    default: "50000 <",
+                    output: {
+                        "count": { $sum: 1 }
+                    }
+                }
+            }
+
+        ])
+
+        res.send([siteData, dingoData])
     }
 
 
