@@ -121,30 +121,17 @@ export function login({ username, password }) {
                             })
 
                         })
-                        // retreiving related data to the current site
-                        axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') })
-                            .then((res) => {
-                                let filterData = res.data
-                                console.log(filterData)
-                                localStorage.setItem('filterData', JSON.stringify(filterData))
-                                dispatch({
-                                    type: 'set_filter',
-                                    payload: {
-                                        filterData
-                                    }
-                                })
-                            }).then(() => {
-                                document.location.reload()
-                            }).catch(error => {
-                                console.log('waiting for filter data', error)
-                            })
-
-
 
                     }).catch(error => {
                         dispatch({
                             type: 'AUTH_ERROR',
                             payload: `UserInfo is not valid: ${error}`
+                        })
+                    }).then(() => {
+                        axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') }).then((res) => {
+                            let filterData = res.data
+                            console.log(filterData)
+                            localStorage.setItem('filterData', JSON.stringify(filterData))
                         })
                     })
 
