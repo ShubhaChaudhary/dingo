@@ -127,14 +127,7 @@ export function login({ username, password }) {
                             type: 'AUTH_ERROR',
                             payload: `UserInfo is not valid: ${error}`
                         })
-                    }).then(() => {
-                        axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') }).then((res) => {
-                            let filterData = res.data
-                            console.log(filterData)
-                            localStorage.setItem('filterData', JSON.stringify(filterData))
-                        })
                     })
-
 
 
             })

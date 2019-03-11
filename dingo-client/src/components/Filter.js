@@ -11,6 +11,20 @@ import axios from 'axios'
 
 class Filter extends React.Component {
     componentDidMount() {
+
+        axios.post('http://localhost:3001/data/filter', { "Site": "Newmont Nevada" }).then((res) => {
+            let filterData = res.data
+            console.log(filterData)
+            localStorage.setItem('filterData', JSON.stringify(filterData))
+
+            // dispatch({
+            //     type: 'set_filter',
+            //     payload: {
+            //         filterData
+            //     }
+            // })
+        })
+
         if (this.props.access_token) {
 
         }
@@ -55,98 +69,98 @@ class Filter extends React.Component {
     }
 
     render() {
-        return (
-            <div id="filter-container">
-                <h2>Filter</h2>
-                <hr />
+        return (<div>Filter</div>)
+        //     <div id="filter-container">
+        //         <h2>Filter</h2>
+        //         <hr />
 
-                <form onSubmit={this.handleSubmit}>
+        //         <form onSubmit={this.handleSubmit}>
 
-                    <label for="site">Site:</label><br />
-                    <select id="site">
+        //             <label for="site">Site:</label><br />
+        //             <select id="site">
 
-                        <option>{this.props.site}</option>
-                    </select>
+        //                 <option>{this.props.site}</option>
+        //             </select>
 
-                    <br /><br />
-                    <label for="location">Location:</label><br />
-                    <select id="location">
-                        {this.props.location.map((value, index) => {
-                            return (<option key={index}>{value}</option>)
-                        })}
-                    </select>
+        //             <br /><br />
+        //             <label for="location">Location:</label><br />
+        //             <select id="location">
+        //                 {this.props.location.map((value, index) => {
+        //                     return (<option key={index}>{value}</option>)
+        //                 })}
+        //             </select>
 
-                    <br /><br />
-                    <label for="assetMake">Asset Make:</label><br />
-                    <select id="assetMake">
-                        {this.props.assetMake.map((value, index) => {
-                            return (<option key={index}>{value}</option>)
-                        })}
-                    </select>
+        //             <br /><br />
+        //             <label for="assetMake">Asset Make:</label><br />
+        //             <select id="assetMake">
+        //                 {this.props.assetMake.map((value, index) => {
+        //                     return (<option key={index}>{value}</option>)
+        //                 })}
+        //             </select>
 
-                    <br /><br />
-                    <label for="assetModel">Asset Model:</label><br />
-                    <select id="assetModel">
-                        {this.props.assetModel.map((value, index) => {
-                            return (<option key={index}>{value}</option>)
-                        })}
-                    </select>
+        //             <br /><br />
+        //             <label for="assetModel">Asset Model:</label><br />
+        //             <select id="assetModel">
+        //                 {this.props.assetModel.map((value, index) => {
+        //                     return (<option key={index}>{value}</option>)
+        //                 })}
+        //             </select>
 
-                    <br /><br />
-                    <label for="assetType">Asset Type:</label><br />
-                    <select id="assetType">
-                        {this.props.assetType.map((value, index) => {
-                            return (<option key={index}>{value}</option>)
-                        })}
-                    </select>
+        //             <br /><br />
+        //             <label for="assetType">Asset Type:</label><br />
+        //             <select id="assetType">
+        //                 {this.props.assetType.map((value, index) => {
+        //                     return (<option key={index}>{value}</option>)
+        //                 })}
+        //             </select>
 
-                    {/* <br /><br />
-                    <label for="componenMake">Component Type:</label><br />
-                    <select id="componenMake">
-                        <option>ABC</option>
-                        <option>CDAl</option>
-                        <option>DSA</option>
-                    </select> */}
+        //             {/* <br /><br />
+        //             <label for="componenMake">Component Type:</label><br />
+        //             <select id="componenMake">
+        //                 <option>ABC</option>
+        //                 <option>CDAl</option>
+        //                 <option>DSA</option>
+        //             </select> */}
 
-                    <br /><br />
-                    <label for="componentModel">Component Model:</label><br />
-                    <select id="componentModel">
-                        {this.props.componentModel.map((value, index) => {
-                            return (<option key={index}>{value}</option>)
-                        })}
-                    </select>
+        //             <br /><br />
+        //             <label for="componentModel">Component Model:</label><br />
+        //             <select id="componentModel">
+        //                 {this.props.componentModel.map((value, index) => {
+        //                     return (<option key={index}>{value}</option>)
+        //                 })}
+        //             </select>
 
-                    <br /><br />
-                    <label for="componentType">Component Type:</label><br />
-                    <select id="componentType">
-                        {this.props.componentType.map((value, index) => {
-                            return (<option key={index}>{value}</option>)
-                        })}
-                    </select>
+        //             <br /><br />
+        //             <label for="componentType">Component Type:</label><br />
+        //             <select id="componentType">
+        //                 {this.props.componentType.map((value, index) => {
+        //                     return (<option key={index}>{value}</option>)
+        //                 })}
+        //             </select>
 
-                    <br /><br />
+        //             <br /><br />
 
-                    <label for="yearRange">Year Range selctor:</label><br />
-                    <br /><br />
-                    <InputRange
-                        draggableTrack
-                        maxValue={moment().format('YYYY')}
-                        minValue={2000}
-                        onChange={value => this.props.setYearRange(value)}
-                        onChangeComplete={value => console.log(value)}
-                        value={this.props.year}
-                        id="yearRange" />
+        //             <label for="yearRange">Year Range selctor:</label><br />
+        //             <br /><br />
+        //             <InputRange
+        //                 draggableTrack
+        //                 maxValue={moment().format('YYYY')}
+        //                 minValue={2000}
+        //                 onChange={value => this.props.setYearRange(value)}
+        //                 onChangeComplete={value => console.log(value)}
+        //                 value={this.props.year}
+        //                 id="yearRange" />
 
 
-                    <br /><br />
+        //             <br /><br />
 
-                    <Button type="submit" variant="contained" color="primary">Filter</Button>
+        //             <Button type="submit" variant="contained" color="primary">Filter</Button>
 
-                </form>
-                <br /><br />
-                <Button onClick={this.userLogout} variant="contained" color="primary" >Logout</Button>
-            </div>
-        )
+        //         </form>
+        //         <br /><br />
+        //         <Button onClick={this.userLogout} variant="contained" color="primary" >Logout</Button>
+        //     </div>
+        // )
     }
 }
 
@@ -155,12 +169,12 @@ const mapStateToProps = state => ({
     access_token: state.auth.access_token,
     year: state.yearpicker.year,
 
-    location: state.userdata.filter[0]["Location"],
-    assetMake: state.userdata.filter[0]["Global Asset Make"],
-    assetModel: state.userdata.filter[0]["Global Asset Model"],
-    assetType: state.userdata.filter[0]["Global Asset Type"],
-    componentType: state.userdata.filter[0]["Global Component Type"],
-    componentModel: state.userdata.filter[0]["Global Component Model"],
+    // location: state.userdata.filter[0]["Location"],
+    // assetMake: state.userdata.filter[0]["Global Asset Make"],
+    // assetModel: state.userdata.filter[0]["Global Asset Model"],
+    // assetType: state.userdata.filter[0]["Global Asset Type"],
+    // componentType: state.userdata.filter[0]["Global Component Type"],
+    // componentModel: state.userdata.filter[0]["Global Component Model"],
 
 })
 export default connect(mapStateToProps, actions)(Filter)
