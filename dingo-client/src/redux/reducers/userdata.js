@@ -7,8 +7,8 @@ const intialState = {
 
 export default (state = intialState, action) => {
     switch (action.type) {
-        case 'set_filter':
-            return { ...state, filter: action.filter }
+        case 'FILTER_DATA':
+            return { ...state, filter: action.datafilter }
         case 'set_userBenchmarkData':
             return { ...state, userBenchmarkData: action.userBenchmarkData }
         case 'set_dingoBenchmarkData':

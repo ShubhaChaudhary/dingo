@@ -16,7 +16,8 @@ module.exports = (Data) => {
                     "Global Asset Model": { $addToSet: "$Global Asset Model" },
                     "Global Asset Type": { $addToSet: "$Global Asset Type" },
                     "Global Component Type": { $addToSet: '$Global Component Type' },
-                    "Global Component Model": { $addToSet: '$Global Component Model' }
+                    "Global Component Model": { $addToSet: '$Global Component Model' },
+                    "Global Component Make": { $addToSet: '$Global Component Make' }
                 }
             }
         ]).then((result) => {
