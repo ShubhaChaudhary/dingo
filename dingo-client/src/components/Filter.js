@@ -38,8 +38,19 @@ class Filter extends React.Component {
             "Global Asset Type": form.elements.assetType.value,
             "Global Asset Model": form.elements.assetModel.value,
             "Global Component Type": form.elements.componentType.value,
-            "Global Component Make": form.elements.componenMake.value
+            "Global Component Make": form.elements.componentMake.value,
+            "Range": years
         })
+
+        // console.log({
+        //     "Location": form.elements.location.value,
+        //     "Global Asset Make": form.elements.assetMake.value,
+        //     "Global Component Model": form.elements.componentModel.value,
+        //     "Global Asset Type": form.elements.assetType.value,
+        //     "Global Asset Model": form.elements.assetModel.value,
+        //     "Global Component Type": form.elements.componentType.value,
+        //     "Range": years
+        // })
 
     }
 
@@ -144,12 +155,12 @@ const mapStateToProps = state => ({
     access_token: state.auth.access_token,
     year: state.yearpicker.year,
 
-    location: state.userdata.filter[0].Location[0],
-    assetMake: state.userdata.filter[0]["Global Asset Make"][0],
-    assetModel: state.userdata.filter[0]["Global Asset Model"][0],
-    assetType: state.userdata.filter[0]["Global Asset Type"][0],
-    componentType: state.userdata.filter[0]["Global Component Type"][0],
-    componentModel: state.userdata.filter[0]["Global Component Model"][0],
+    location: state.userdata.filter[0]["Location"],
+    assetMake: state.userdata.filter[0]["Global Asset Make"],
+    assetModel: state.userdata.filter[0]["Global Asset Model"],
+    assetType: state.userdata.filter[0]["Global Asset Type"],
+    componentType: state.userdata.filter[0]["Global Component Type"],
+    componentModel: state.userdata.filter[0]["Global Component Model"],
 
 })
 export default connect(mapStateToProps, actions)(Filter)
