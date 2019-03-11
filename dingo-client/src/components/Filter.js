@@ -11,20 +11,6 @@ import axios from 'axios'
 
 class Filter extends React.Component {
     componentDidMount() {
-
-        axios.post('http://localhost:3001/data/filter', { "Site": "Newmont Nevada" }).then((res) => {
-            let filterData = res.data
-            console.log(filterData)
-            localStorage.setItem('filterData', JSON.stringify(filterData))
-
-            // dispatch({
-            //     type: 'set_filter',
-            //     payload: {
-            //         filterData
-            //     }
-            // })
-        })
-
         if (this.props.access_token) {
             this.props.fetchFilterData(localStorage.getItem('site'))
         }
