@@ -61,7 +61,7 @@ module.exports = (Data) => {
 
             {
                 '$match': {
-                    'Site': { '$ne': 'Newmount Nevada' },
+                    'Site': { '$ne': 'Newmont Nevada' },
                     "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
                 }
             },
@@ -85,24 +85,29 @@ module.exports = (Data) => {
 
     //  Retrieves the Avg Component Age according to their Removal Date from mongodb Atlas
     const performance = (req, res) => {
+        const filterdata=req.body
         Data.aggregate(
             [
                 {
                     "$match": {
-                        "Location": "Off Contract Trucks",
+                       "Location": "Off Contract Trucks",
                         "Global Asset Make": "Caterpillar",
                         "Global Component Model": "793C",
                         "Global Asset Type": "Off-Highway Truck",
                         "Global Asset Model": "793C",
-                        "Global Component Type": "Transmission"
+                        "Global Component Type": "Transmission",
+                
+                        // "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                        
                     }
                 },
                 {
                     "$group": {
-                        "_id": {
-                            "Component Profile": "$Component Profile",
-                            "RemoveDate": "$RemoveDate"
-                        },
+                        "_id":  "$RemoveDate" ,
+                        // {
+                        //     // "Component Profile": "$Component Profile",
+                        //     "RemoveDate": "$RemoveDate"
+                        // },
                         "AVG(Component Age)": {
                             "$avg": "$Component Age"
                         }
