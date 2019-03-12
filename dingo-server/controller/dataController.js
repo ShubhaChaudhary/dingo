@@ -35,12 +35,15 @@ module.exports = (Data) => {
     //  Retrieves the Component Age and total count (last three year by default)from mongodb Atlas
     const dashboard = async (req, res) => {
         // User Site data
+
+        let site = req.body.Site;
+        let range = req.body.Range;
         let siteData = await Data.aggregate([
             {
                 $match: {
-
-                    "Site": "Newmont Nevada",
-                    "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                    'Site': site,
+                    ...req.filterData,
+                    "$or": range
 
                 }
             },
@@ -60,9 +63,10 @@ module.exports = (Data) => {
         let dingoData = await Data.aggregate([
 
             {
-                '$match': {
-                    'Site': { '$ne': 'Newmount Nevada' },
-                    "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                $match: {
+                    'Site': { '$ne': site },
+                    ...req.body.filterData,
+                    "$or": range
                 }
             },
 
@@ -84,26 +88,55 @@ module.exports = (Data) => {
 
 
     //  Retrieves the Avg Component Age according to their Removal Date from mongodb Atlas
-    const performance = (req, res) => {
-        Data.aggregate(
+    const performance = async (req, res) => {
+        let userData = await Data.aggregate(
             [
                 {
-                    "$match": {
-                        "Location": "Off Contract Trucks",
-                        "Global Asset Make": "Caterpillar",
-                        "Global Component Model": "793C",
-                        "Global Asset Type": "Off-Highway Truck",
-                        "Global Asset Model": "793C",
-                        "Global Component Type": "Transmission"
+                    $match: {
+                        "Site": "Newmont Nevada",
+                        "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                        // "Location": "Off Contract Trucks",
+                        // "Global Asset Make": "Caterpillar",
+                        // "Global Component Model": "793C",
+                        // "Global Asset Type": "Off-Highway Truck",
+                        // "Global Asset Model": "793C",
+                        // "Global Component Type": "Transmission"
                     }
                 },
                 {
                     "$group": {
-                        "_id": {
-                            "Component Profile": "$Component Profile",
-                            "RemoveDate": "$RemoveDate"
+                        "_id": "$RemoveDate",
+                        "AVG": {
+                            "$avg": "$Component Age"
                         },
-                        "AVG(Component Age)": {
+                    }
+                },
+
+                {
+                    "$sort": {
+                        "_id": 1
+                    }
+                }
+            ])
+
+        let dingoData = await Data.aggregate(
+            [
+                {
+                    $match: {
+                        "Site": { '$ne': 'Newmount Nevada' },
+                        "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                        // "Location": "Off Contract Trucks",
+                        // "Global Asset Make": "Caterpillar",
+                        // "Global Component Model": "793C",
+                        // "Global Asset Type": "Off-Highway Truck",
+                        // "Global Asset Model": "793C",
+                        // "Global Component Type": "Transmission"
+                    }
+                },
+                {
+                    "$group": {
+                        "_id": "$RemoveDate",
+                        "AVG": {
                             "$avg": "$Component Age"
                         }
                     }
@@ -111,14 +144,13 @@ module.exports = (Data) => {
 
                 {
                     "$sort": {
-                        "RemoveDate": 1
+                        "_id": 1
                     }
                 }
-            ]).then((result) => {
-                res.send(result)
-            }).catch((e) => {
-                res.send(e)
-            })
+            ])
+
+        res.send([userData, dingoData])
+
     }
 
     return {
