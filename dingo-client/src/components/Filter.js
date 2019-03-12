@@ -47,26 +47,12 @@ class Filter extends React.Component {
             "Range": years
         })
 
-        // console.log({
-        //     "Location": form.elements.location.value,
-        //     "Global Asset Make": form.elements.assetMake.value,
-        //     "Global Component Model": form.elements.componentModel.value,
-        //     "Global Asset Type": form.elements.assetType.value,
-        //     "Global Asset Model": form.elements.assetModel.value,
-        //     "Global Component Type": form.elements.componentType.value,
-        //     "Range": years
-        // })
+       
 
     }
 
 
     render() {
-
-        const data = (this.props.location)
-        if (data) {
-            console.log(data.length)
-        }
-        console.log(this.props.assetModel)
 
         return (
             <div id="filter-container">
