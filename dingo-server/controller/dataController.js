@@ -89,48 +89,42 @@ module.exports = (Data) => {
 
     //  Retrieves the Avg Component Age according to their Removal Date from mongodb Atlas
     const performance = async (req, res) => {
-        let userData = await Data.aggregate(
-            [
-                {
-                    $match: {
-                        "Site": "Newmont Nevada",
-                        "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
-                        // "Location": "Off Contract Trucks",
-                        // "Global Asset Make": "Caterpillar",
-                        // "Global Component Model": "793C",
-                        // "Global Asset Type": "Off-Highway Truck",
-                        // "Global Asset Model": "793C",
-                        // "Global Component Type": "Transmission"
-                    }
-                },
-                {
-                    "$group": {
-                        "_id": "$RemoveDate",
-                        "AVG": {
-                            "$avg": "$Component Age"
-                        },
-                    }
-                },
+        let site = req.body.Site;
+        let range = req.body.Range;
 
-                {
-                    "$sort": {
-                        "_id": 1
+        let siteData = await Data.aggregate([
+            {
+                "$match": {
+                    'Site': site,
+                    ...req.body.filterData,
+                    "$or": range
+
+                }
+            },
+            {
+                "$group": {
+                    "_id": "$RemoveDate",
+                    "AVG": {
+                        "$avg": "$Component Age"
                     }
                 }
-            ])
+            },
+
+            {
+                "$sort": {
+                    "_id": 1
+                }
+            }
+        ])
 
         let dingoData = await Data.aggregate(
             [
                 {
-                    $match: {
-                        "Site": { '$ne': 'Newmount Nevada' },
-                        "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
-                        // "Location": "Off Contract Trucks",
-                        // "Global Asset Make": "Caterpillar",
-                        // "Global Component Model": "793C",
-                        // "Global Asset Type": "Off-Highway Truck",
-                        // "Global Asset Model": "793C",
-                        // "Global Component Type": "Transmission"
+                    "$match": {
+                        'Site': { '$ne': site },
+                        ...req.body.filterData,
+                        "$or": range
+
                     }
                 },
                 {
@@ -144,13 +138,11 @@ module.exports = (Data) => {
 
                 {
                     "$sort": {
-                        "_id": 1
+                        "RemoveDate": 1
                     }
                 }
             ])
-
-        res.send([userData, dingoData])
-
+        res.send([siteData, dingoData])
     }
 
     return {
