@@ -1,31 +1,31 @@
 import { Issuer } from 'openid-client';
 import axios from 'axios'
 
-export const fetchdataBenchmarkChart = ()=> async dispatch =>{
-    const res = await axios.post('http://localhost:3001/data/dashboard',
-            {
-                "Site": localStorage.getItem('site'),
-                filterData: {},
-                Range: [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
-            }
+export const fetchdataBenchmarkChart = () => async dispatch => {
+    const res = await axios.post('https://dingo-server.herokuapp.com/data/dashboard',
+        {
+            "Site": localStorage.getItem('site'),
+            filterData: {},
+            Range: [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+        }
 
-        )
-        const { data } = res
-        dispatch({ type: 'BENCHMARK_DATUM',payload: data})
-        // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
+    )
+    const { data } = res
+    dispatch({ type: 'BENCHMARK_DATUM', payload: data })
+    // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
 }
-export const fetchdataPerformancechart = ()=> async dispatch =>{
-    const res = await axios.post('http://localhost:3001/data/performance',
-            {
-                "Site": localStorage.getItem('site'),
-                filterData: {},
-                Range: [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
-            }
+export const fetchdataPerformancechart = () => async dispatch => {
+    const res = await axios.post('https://dingo-server.herokuapp.com/data/performance',
+        {
+            "Site": localStorage.getItem('site'),
+            filterData: {},
+            Range: [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+        }
 
-        )
-        const { data } = res
-        dispatch({ type: 'PERFORMANCE_DATUM',payload: data})
-        // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
+    )
+    const { data } = res
+    dispatch({ type: 'PERFORMANCE_DATUM', payload: data })
+    // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
 }
 
 
@@ -33,7 +33,7 @@ export const fetchFilterData = (site) => async dispatch => {
 
     const data = { "Site": site }
 
-    const filterData = await axios.post('http://localhost:3001/data/filter', data)
+    const filterData = await axios.post('https://dingo-server.herokuapp.com/data/filter', data)
     const datafilter = filterData.data[0];
     console.log(datafilter)
     dispatch({

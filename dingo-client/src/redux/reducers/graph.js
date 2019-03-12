@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ('BENCHMARK_DATUM'):
-            return { ...state,benckmark: action.payload}
+            return { ...state, benchmark: action.payload }
         case ('PERFORMANCE_DATUM'):
             return { ...state, performance: action.payload }
         default:
