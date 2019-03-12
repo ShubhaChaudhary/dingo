@@ -32,13 +32,18 @@ class Filter extends React.Component {
             years.push({ "RemoveDate": this.props.year.min + i })
         }
         let { data } = await axios.post('http://localhost:3001/data/performance', {
-            "Location": form.elements.location.value,
-            "Global Asset Make": form.elements.assetMake.value,
-            "Global Component Model": form.elements.componentModel.value,
-            "Global Asset Type": form.elements.assetType.value,
-            "Global Asset Model": form.elements.assetModel.value,
-            "Global Component Type": form.elements.componentType.value,
-            "Global Component Make": form.elements.componentMake.value,
+
+            filterData: {
+                "Location": form.elements.location.value,
+                "Global Asset Make": form.elements.assetMake.value,
+                "Global Component Model": form.elements.componentModel.value,
+                "Global Asset Type": form.elements.assetType.value,
+                "Global Asset Model": form.elements.assetModel.value,
+                "Global Component Type": form.elements.componentType.value,
+                "Global Component Make": form.elements.componentMake.value,
+
+            },
+
             "Range": years
         })
 
