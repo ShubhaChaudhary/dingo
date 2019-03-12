@@ -70,3 +70,6 @@ h1{
   width: 900px;
   height: 500px;
 }
+.nv-context{
+  display: none !important;
+}
