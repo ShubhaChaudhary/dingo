@@ -35,13 +35,15 @@ module.exports = (Data) => {
     //  Retrieves the Component Age and total count (last three year by default)from mongodb Atlas
     const dashboard = async (req, res) => {
         // User Site data
+
+        let site = req.body.Site;
+        let range = req.body.Range;
         let siteData = await Data.aggregate([
             {
                 $match: {
-
-                    "Site": "Newmont Nevada",
-            
-                    "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                    'Site': site,
+                    ...req.filterData,
+                    "$or": range
 
                 }
             },
@@ -61,9 +63,10 @@ module.exports = (Data) => {
         let dingoData = await Data.aggregate([
 
             {
-                '$match': {
-                    'Site': { '$ne': 'Newmont Nevada' },
-                    "$or": [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+                $match: {
+                    'Site': { '$ne': site },
+                    ...req.body.filterData,
+                    "$or": range
                 }
             },
 
@@ -85,24 +88,49 @@ module.exports = (Data) => {
 
 
     //  Retrieves the Avg Component Age according to their Removal Date from mongodb Atlas
-    const performance = async(req, res) => {
-        let site= req.body.Site
-        const range = req.body.Range
+    const performance = async (req, res) => {
+        let site = req.body.Site;
+        let range = req.body.Range;
 
-       let siteData =  await Data.aggregate(
+        let siteData = await Data.aggregate([
+            {
+                "$match": {
+                    'Site': site,
+                    ...req.body.filterData,
+                    "$or": range
+
+                }
+            },
+            {
+                "$group": {
+                    "_id": "$RemoveDate",
+                    "AVG": {
+                        "$avg": "$Component Age"
+                    }
+                }
+            },
+
+            {
+                "$sort": {
+                    "_id": 1
+                }
+            }
+        ])
+
+        let dingoData = await Data.aggregate(
             [
                 {
                     "$match": {
-                        'Site': site,
-                      ...req.body.filterData,
+                        'Site': { '$ne': site },
+                        ...req.body.filterData,
                         "$or": range
-                        
+
                     }
                 },
                 {
                     "$group": {
-                        "_id":  "$RemoveDate" ,
-                         "AVG": {
+                        "_id": "$RemoveDate",
+                        "AVG": {
                             "$avg": "$Component Age"
                         }
                     }
@@ -114,33 +142,7 @@ module.exports = (Data) => {
                     }
                 }
             ])
-
-            let dingoData =  await Data.aggregate(
-                [
-                    {
-                        "$match": {
-                            'Site': {'$ne': site},
-                          ...req.body.filterData,
-                            "$or": range
-                            
-                        }
-                    },
-                    {
-                        "$group": {
-                            "_id":  "$RemoveDate" ,
-                             "AVG": {
-                                "$avg": "$Component Age"
-                            }
-                        }
-                    },
-    
-                    {
-                        "$sort": {
-                            "RemoveDate": 1
-                        }
-                    }
-                ])
-            res.send([siteData, dingoData])
+        res.send([siteData, dingoData])
     }
 
     return {

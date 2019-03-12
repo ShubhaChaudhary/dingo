@@ -14,7 +14,14 @@ class BarChart extends React.Component {
     }
 
     async fetchData() {
-        const res = await axios.get('http://localhost:3001/data/performance')
+        const res = await axios.post('http://localhost:3001/data/performance',
+            {
+                "Site": localStorage.getItem('site'),
+                filterData: {},
+                Range: [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+            }
+
+        )
         const { data } = await res
         this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
     }
