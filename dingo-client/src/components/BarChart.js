@@ -14,9 +14,9 @@ class BarChart extends React.Component {
     }
 
     async fetchData() {
-        const res = await axios.get('http://localhost:3001/data/dashboard')
+        const res = await axios.get('http://localhost:3001/data/performance')
         const { data } = await res
-        this.setState({ datum: [{ key: "Component Health", values: data }] })
+        this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
     }
 
     componentDidMount() {
@@ -26,7 +26,7 @@ class BarChart extends React.Component {
     render() {
 
         return (
-            <NVD3Chart id="barChart" type="discreteBarChart" datum={this.state.datum} x="_id" y="count" />
+            <NVD3Chart id="barChart" type="multiBarChart" datum={this.state.datum} x="_id" y="AVG" />
         )
     }
 }
