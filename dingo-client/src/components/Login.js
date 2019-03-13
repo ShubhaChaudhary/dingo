@@ -27,13 +27,13 @@ class Login extends React.Component {
                     color: 'white',
                     padding: '30px',
                     width: '200px',
-                    background: 'rgba(67, 67, 67, 0.80', //dingo grey
+                    background: 'rgba(67, 67, 67, 0.80)', //dingo grey
                     'max-height': '375px',
                     'border-radius': '10px'
                 }}>
                     <img src="http://www.dingo.com/Dingo/media/img/dingo-logo.png" alt='Dingo logo' width='200px' />
                     <form onSubmit={handleSubmit(this.onSubmit)}>
-                    <h3>Performance and Banchmarking</h3>
+                    <h3>Performance and Benchmarking</h3>
                     <br></br>
                     <p>Username</p>
                         <Field
