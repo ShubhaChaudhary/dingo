@@ -9,6 +9,6 @@ export default combineReducers({
     auth,
     userdata,
     yearpicker,
-    graph,    
+    graph,
     form: formReducer
 })

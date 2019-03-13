@@ -73,3 +73,7 @@ h1{
 .nv-context{
   display: none !important;
 }
+
+.nv-controlsWrap{
+   display: none !important;
+}
