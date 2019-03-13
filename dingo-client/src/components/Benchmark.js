@@ -5,6 +5,8 @@ import LineChart from './LineChart'
 // import Tab from '@material-ui/core/Tab';
 // import { Link } from 'react-router-dom'
 export default () => {
+
+
   return (
     <React.Fragment>
       <LineChart />

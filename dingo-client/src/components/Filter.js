@@ -8,6 +8,7 @@ import moment from "moment";
 import InputRange from 'react-input-range'
 import 'react-input-range/lib/css/index.css'
 import axios from 'axios'
+    ;
 
 class Filter extends React.Component {
     componentDidMount() {
@@ -27,27 +28,28 @@ class Filter extends React.Component {
 
         const form = event.target
         let years = []
+        let filter = {}
 
+        // Formatting range in the right format
         for (let i = 0; i <= this.props.year.max - Number(this.props.year.min); i += 1) {
             years.push({ "RemoveDate": this.props.year.min + i })
+
         }
-        let { data } = await axios.post('http://localhost:3001/data/performance', {
 
-            filterData: {
-                "Location": form.elements.location.value,
-                "Global Asset Make": form.elements.assetMake.value,
-                "Global Component Model": form.elements.componentModel.value,
-                "Global Asset Type": form.elements.assetType.value,
-                "Global Asset Model": form.elements.assetModel.value,
-                "Global Component Type": form.elements.componentType.value,
-                "Global Component Make": form.elements.componentMake.value,
+        //poulating filter data
+        for (let element of form.elements) {
+            if (element.value !== "All" && element.id !== 'Site' && element.type !== 'submit') {
+                filter[element.id] = element.value
+            }
+        }
 
-            },
+        // console.log({ site: form.elements.Site.value, filterdata: filter, range: years })
+        if (this.props.tab === 'benchmark') {
+            this.props.fetchdataBenchmarkChart(filter, years)
+        } else if (this.props.tab === 'performance') {
+            this.props.fetchdataPerformancechart(filter, years)
+        }
 
-            "Range": years
-        })
-
-       
 
     }
 
@@ -59,57 +61,64 @@ class Filter extends React.Component {
                 <h2>Filter</h2>
                 <hr />
                 <form onSubmit={this.handleSubmit}>
-                    <label for="site">Site:</label><br />
-                    <select id="site">
+                    <label for="Site">Site:</label><br />
+                    <select id="Site">
                         <option>{this.props.site}</option>
                     </select>
                     <br /><br />
-                    <label for="location">Location:</label><br />
-                    <select id="location">
+                    <label for="Location">Location:</label><br />
+                    <select id="Location">
+                        <option>All</option>
                         {this.props.location && this.props.location.map((value, index) => {
                             return (<option key={index}>{value}</option>)
                         })}
                     </select>
                     <br /><br />
-                    <label for="assetMake">Asset Make:</label><br />
-                    <select id="assetMake">
+                    <label for="Global Asset Make">Asset Make:</label><br />
+                    <select id="Global Asset Make">
+                        <option>All</option>
                         {this.props.assetMake && this.props.assetMake.map((value, index) => {
                             return (<option key={index}>{value}</option>)
                         })}
                     </select>
                     <br /><br />
-                    <label for="assetModel">Asset Model:</label><br />
-                    <select id="assetModel">
+                    <label for="Global Asset Model">Asset Model:</label><br />
+                    <select id="Global Asset Model">
+                        <option>All</option>
                         {this.props.assetModel && this.props.assetModel.map((value, index) => {
                             return (<option key={index}>{value}</option>)
                         })}
                     </select>
                     <br /><br />
-                    <label for="assetType">Asset Type:</label><br />
-                    <select id="assetType">
+                    <label for="Global Asset Type">Asset Type:</label><br />
+                    <select id="Global Asset Type">
+                        <option>All</option>
                         {this.props.assetType && this.props.assetType.map((value, index) => {
                             return (<option key={index}>{value}</option>)
                         })}
                     </select>
                     <br /><br />
-                    <label for="componentModel">Component Model:</label><br />
-                    <select id="componentModel">
+                    <label for="Global Component Model">Component Model:</label><br />
+                    <select id="Global Component Model">
+                        <option>All</option>
                         {this.props.componentModel && this.props.componentModel.map((value, index) => {
                             return (<option key={index}>{value}</option>)
                         })}
                     </select>
 
                     <br /><br />
-                    <label for="componentType">Component Type:</label><br />
-                    <select id="componentType">
+                    <label for="Global Component Type">Component Type:</label><br />
+                    <select id="Global Component Type">
+                        <option>All</option>
                         {this.props.componentType && this.props.componentType.map((value, index) => {
                             return (<option key={index}>{value}</option>)
                         })}
                     </select>
 
                     <br /><br />
-                    <label for="componentMake">Component Make:</label><br />
-                    <select id="componentMake">
+                    <label for="Global Component Make">Component Make:</label><br />
+                    <select id="Global Component Make">
+                        <option>All</option>
                         {this.props.componentMake && this.props.componentMake.map((value, index) => {
                             return (<option key={index}>{value}</option>)
                         })}
@@ -144,7 +153,7 @@ const mapStateToProps = state => ({
     access_token: state.auth.access_token,
     year: state.yearpicker.year,
 
-
+    tab: state.graph.tab,
     location: state.userdata.filter['Location'],
     assetMake: state.userdata.filter["Global Asset Make"],
     assetModel: state.userdata.filter["Global Asset Model"],

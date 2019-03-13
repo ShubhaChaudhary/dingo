@@ -1,12 +1,20 @@
 import { Issuer } from 'openid-client';
 import axios from 'axios'
 
-export const fetchdataBenchmarkChart = () => async dispatch => {
+
+export const tabChange = (tab) => {
+    return {
+        type: 'TAB_SELECTION',
+        payload: tab
+    }
+}
+
+export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
     const res = await axios.post('https://dingo-server.herokuapp.com/data/dashboard',
         {
             "Site": localStorage.getItem('site'),
-            filterData: {},
-            Range: [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+            filterData: filter,
+            Range: range
         }
 
     )
@@ -14,12 +22,12 @@ export const fetchdataBenchmarkChart = () => async dispatch => {
     dispatch({ type: 'BENCHMARK_DATUM', payload: data })
     // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
 }
-export const fetchdataPerformancechart = () => async dispatch => {
+export const fetchdataPerformancechart = (filter, range) => async dispatch => {
     const res = await axios.post('https://dingo-server.herokuapp.com/data/performance',
         {
             "Site": localStorage.getItem('site'),
-            filterData: {},
-            Range: [{ "RemoveDate": 2019 }, { "RemoveDate": 2018 }, { "RemoveDate": 2017 }]
+            filterData: filter,
+            Range: range
         }
 
     )
