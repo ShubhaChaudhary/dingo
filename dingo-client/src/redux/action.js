@@ -18,11 +18,15 @@ export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
         }
 
     )
-    const { data } = res
+    const { data } = await res
+    dispatch({ type: 'BENCHMARK_DATUM', payload: [[],[]] })
     dispatch({ type: 'BENCHMARK_DATUM', payload: data })
     // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
-}
+ }
+ 
+
 export const fetchdataPerformancechart = (filter, range) => async dispatch => {
+
     const res = await axios.post('https://dingo-server.herokuapp.com/data/performance',
         {
             "Site": localStorage.getItem('site'),
@@ -32,7 +36,9 @@ export const fetchdataPerformancechart = (filter, range) => async dispatch => {
 
     )
     const { data } = res
+    dispatch({ type: 'PERFORMANCE_DATUM', payload: [[],[]]})
     dispatch({ type: 'PERFORMANCE_DATUM', payload: data })
+
     // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
 }
 
