@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     benchmark: [],
-    performance: []
+    performance: [],
+    tab: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,6 +10,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, benchmark: action.payload }
         case ('PERFORMANCE_DATUM'):
             return { ...state, performance: action.payload }
+        case ('TAB_SELECTION'):
+            return { ...state, tab: action.payload }
         default:
             return state
     }
