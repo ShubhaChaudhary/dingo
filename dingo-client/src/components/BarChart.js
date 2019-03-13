@@ -13,7 +13,8 @@ class BarChart extends React.Component {
 
     render() {
         // console.log(this.props.performance[0])
-        const datum = [{ key: "AVG Component hours", values: this.props.performance[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: this.props.performance[1] }]
+        
+       const datum = [{ key: "AVG Component hours", values: this.props.performance[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: this.props.performance[1] }]
         return (
             <NVD3Chart id="barChart" type="multiBarChart" datum={datum} x="_id" y="AVG" />
         )
