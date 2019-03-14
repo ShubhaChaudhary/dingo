@@ -1,14 +1,14 @@
 import { Issuer } from 'openid-client';
 import axios from 'axios'
 
-
+// updating the redux-store with selection of tab
 export const tabChange = (tab) => {
     return {
         type: 'TAB_SELECTION',
         payload: tab
     }
 }
-
+// Fetch data for the Benchmark graph
 export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
     const res = await axios.post('http://localhost:3001/data/dashboard',
         {
@@ -18,13 +18,13 @@ export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
         }
 
     )
-    const { data } = await res
+    const { data } =  res
     dispatch({ type: 'BENCHMARK_DATUM', payload: [[],[]] })
     dispatch({ type: 'BENCHMARK_DATUM', payload: data })
-    // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
+    
  }
  
-
+// Fetch data for the performance graph
 export const fetchdataPerformancechart = (filter, range) => async dispatch => {
 
     const res = await axios.post('http://localhost:3001/data/performance',
@@ -40,10 +40,10 @@ export const fetchdataPerformancechart = (filter, range) => async dispatch => {
     dispatch({ type: 'PERFORMANCE_DATUM', payload: [[],[]]})
     dispatch({ type: 'PERFORMANCE_DATUM', payload: data })
 
-    // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
+    
 }
 
-
+//  Fetch data for filter
 export const fetchFilterData = (site) => async dispatch => {
 
     const data = { "Site": site }
@@ -56,14 +56,14 @@ export const fetchFilterData = (site) => async dispatch => {
         datafilter
     });
 };
-
+// update the store with year range selection
 export function setYearRange(value) {
     return {
         type: 'YEAR_RANGE',
         value
     }
 }
-
+//  Fetch data from the third-party API and give back the token and make other API request for user(site) information
 export function login({ username, password }) {
     return function (dispatch) {
         let discovered = null;
@@ -154,16 +154,7 @@ export function login({ username, password }) {
                             type: 'AUTH_ERROR',
                             payload: `UserInfo is not valid: ${error}`
                         })
-                        // }).then(() => {
-                        //     axios.post('http://localhost:3001/data/filter', { "Site": localStorage.getItem('site') }).then((res) => {
-                        //         let filterData = res.data
-                        //         console.log(filterData)
-                        //         localStorage.setItem('filterData', JSON.stringify(filterData))
-                        //         dispatch({
-                        //             type: 'set_filter',
-                        //              filter
-                        //         })
-                        //     })
+                      
                     })
 
 
@@ -171,7 +162,7 @@ export function login({ username, password }) {
 
     }
 }
-
+// logout the user
 export function logout() {
     const token_type = localStorage.getItem('token_type')
     const access_token = localStorage.getItem('token')

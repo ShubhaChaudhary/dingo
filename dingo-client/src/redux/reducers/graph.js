@@ -1,3 +1,4 @@
+// Reducer for Graph,
 const INITIAL_STATE = {
     benchmark: [],
     performance: [],

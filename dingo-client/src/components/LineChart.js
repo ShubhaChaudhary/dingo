@@ -1,7 +1,5 @@
 import React from 'react'
-// import { Line } from 'react-chartjs-2'
 import NVD3Chart from 'react-nvd3'
-import axios from 'axios'
 import * as actions from '../redux/action'
 import { connect } from 'react-redux'
 

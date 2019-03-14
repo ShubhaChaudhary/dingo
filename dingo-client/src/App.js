@@ -8,7 +8,6 @@ import Header from './components/Header'
 import Filter from './components/Filter';
 import TabBar from "./components/TabBar";
 import { connect } from 'react-redux'
-import { relativeTimeRounding } from 'moment';
 
 class App extends Component {
 
@@ -47,17 +46,18 @@ class App extends Component {
               }
             }} />
 
-            {/* <Route exact path="/performance" component={Performance} /> */}
+            
           </div>
         </Router>
       </div>
     );
   }
 }
-
+// data access for the redux-store
 const mapStateToProps = state => ({
   access_token: state.auth.access_token,
   
 })
+// connecting component to the store
 export default connect(mapStateToProps)(App);
 
