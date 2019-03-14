@@ -12,14 +12,16 @@ import { reduxForm, Field } from 'redux-form'
 class Login extends React.Component {
 
     onSubmit = ({ username, password }) => {
+        // action is envoked to make login request
         this.props.login({ username, password }, () => {
-            //    this.props.history.push('/performance')
+           
         })
-        //    
+        
     }
 
 
     render() {
+        // method from reduxForm library
         const { handleSubmit } = this.props
         return (
             <div id='login-container'>
@@ -61,6 +63,7 @@ class Login extends React.Component {
                             style={{ background: 'rgb(254, 254, 255)', 'border-radius': '5px' }}
                         />
                         <br /><br />
+                          
                         <div>{this.props.errorMessage}</div>
                         <Button type="submit" variant="contained" color="primary" >Login</Button>
                     </form>

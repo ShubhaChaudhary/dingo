@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reducers from './redux/reducers'
 import thunk from "redux-thunk"
-
+//  setting up the store with initial condition and middeleware for async action-dispatch
 const store = createStore(reducers, {
     auth: { access_token: localStorage.getItem('token'), token_type: localStorage.getItem('token_type'), site: localStorage.getItem('site') },
     // userdata: { filter: JSON.parse(localStorage.getItem('filterData')) }

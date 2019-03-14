@@ -1,3 +1,4 @@
+// Reducer for authentication,  changing the state with action creator dispatch method
 const INITIAL_STATE = {
     access_token: '',
     token_type: '',

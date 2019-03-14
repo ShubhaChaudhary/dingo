@@ -17,7 +17,7 @@ class Filter extends React.Component {
 
     userLogout = () => {
         console.log(this.props.logout())
-        // this.props.logout()
+       
         document.location.reload()
     }
 
@@ -45,16 +45,14 @@ class Filter extends React.Component {
         if (this.props.tab === 'benchmark') {
 
             this.props.fetchdataBenchmarkChart(filter, years)
-            // console.log(this.props.benchmark)
-
-
+            
         } else if (this.props.tab === 'performance') {
             this.props.fetchdataPerformancechart(filter, years)
-            // console.log(this.props.performance)
+            
         }
 
-        console.log(this.props.benchmark)
-
+       
+    
     }
 
 

@@ -58,7 +58,7 @@ module.exports = (Data) => {
                 }
             }
         ])
-
+         // Benchmarking
         const { Location, ...noA } = req.body.filterData
         let dingoData = await Data.aggregate([
 
@@ -116,6 +116,8 @@ module.exports = (Data) => {
                 }
             }
         ])
+
+        // Benchmarking
         const { Location, ...noA } = req.body.filterData
 
         let dingoData = await Data.aggregate(
