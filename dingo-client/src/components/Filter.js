@@ -7,8 +7,6 @@ import auth from '../redux/reducers/auth'
 import moment from "moment";
 import InputRange from 'react-input-range'
 import 'react-input-range/lib/css/index.css'
-import axios from 'axios'
-    ;
 
 class Filter extends React.Component {
     componentDidMount() {
@@ -45,16 +43,27 @@ class Filter extends React.Component {
 
         // console.log({ site: form.elements.Site.value, filterdata: filter, range: years })
         if (this.props.tab === 'benchmark') {
-           
+
             this.props.fetchdataBenchmarkChart(filter, years)
+<<<<<<< HEAD
             
+=======
+            // console.log(this.props.benchmark)
+
+
+>>>>>>> c46ab36fd8e5247d23aa5a29aba6c85e1f872ccc
         } else if (this.props.tab === 'performance') {
             this.props.fetchdataPerformancechart(filter, years)
             
         }
 
+<<<<<<< HEAD
        
     
+=======
+        console.log(this.props.benchmark)
+
+>>>>>>> c46ab36fd8e5247d23aa5a29aba6c85e1f872ccc
     }
 
 
@@ -156,6 +165,8 @@ const mapStateToProps = state => ({
     site: state.auth.site,
     access_token: state.auth.access_token,
     year: state.yearpicker.year,
+    benchmark: state.graph.benchmark,
+    performance: state.graph.performance,
     tab: state.graph.tab,
     location: state.userdata.filter['Location'],
     assetMake: state.userdata.filter["Global Asset Make"],

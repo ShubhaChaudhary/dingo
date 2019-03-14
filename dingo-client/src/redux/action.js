@@ -10,6 +10,8 @@ export const tabChange = (tab) => {
 }
 // Fetch data for the Benchmark graph
 export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
+    let siteBuckets = [], dingoBuckets = []
+
     const res = await axios.post('http://localhost:3001/data/dashboard',
         {
             "Site": localStorage.getItem('site'),
@@ -18,13 +20,33 @@ export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
         }
 
     )
-    const { data } =  res
-    dispatch({ type: 'BENCHMARK_DATUM', payload: [[],[]] })
+    const { data } = await res
+    dispatch({ type: 'BENCHMARK_DATUM', payload: [[], []] })
+
+    for (let elem of data[0]) {
+        siteBuckets.push(elem._id)
+    }
+
+    for (let i = 0; i < 50000; i += 2000) {
+        dingoBuckets.push(i)
+    }
+
+    let missingBuckets = dingoBuckets.filter(x => !siteBuckets.includes(x));
+
+    for (let elem of missingBuckets) {
+        data[0].push({ _id: elem, count: 0 })
+        data[0].sort((a, b) => { return a._id - b._id })
+    }
+
+    console.log(data)
+
+
+
     dispatch({ type: 'BENCHMARK_DATUM', payload: data })
-    
- }
- 
-// Fetch data for the performance graph
+    // this.setState({ datum: [{ key: "AVG Component hours", values: data[0] }, { key: "AVG Trakka Component Hours", "color": "#f44253", values: data[1] }] })
+}
+
+
 export const fetchdataPerformancechart = (filter, range) => async dispatch => {
 
     const res = await axios.post('http://localhost:3001/data/performance',
@@ -37,7 +59,7 @@ export const fetchdataPerformancechart = (filter, range) => async dispatch => {
     )
     const { data } = res
     console.log(data)
-    dispatch({ type: 'PERFORMANCE_DATUM', payload: [[],[]]})
+    dispatch({ type: 'PERFORMANCE_DATUM', payload: [[], []] })
     dispatch({ type: 'PERFORMANCE_DATUM', payload: data })
 
     
