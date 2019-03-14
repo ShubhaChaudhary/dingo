@@ -45,25 +45,14 @@ class Filter extends React.Component {
         if (this.props.tab === 'benchmark') {
 
             this.props.fetchdataBenchmarkChart(filter, years)
-<<<<<<< HEAD
             
-=======
-            // console.log(this.props.benchmark)
-
-
->>>>>>> c46ab36fd8e5247d23aa5a29aba6c85e1f872ccc
         } else if (this.props.tab === 'performance') {
             this.props.fetchdataPerformancechart(filter, years)
             
         }
 
-<<<<<<< HEAD
        
     
-=======
-        console.log(this.props.benchmark)
-
->>>>>>> c46ab36fd8e5247d23aa5a29aba6c85e1f872ccc
     }
 
 

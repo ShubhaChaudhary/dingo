@@ -12,7 +12,7 @@ export const tabChange = (tab) => {
 export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
     let siteBuckets = [], dingoBuckets = []
 
-    const res = await axios.post('http://localhost:3001/data/dashboard',
+    const res = await axios.post('https://dingo-server.herokuapp.com/data/dashboard',
         {
             "Site": localStorage.getItem('site'),
             filterData: filter,
@@ -49,7 +49,7 @@ export const fetchdataBenchmarkChart = (filter, range) => async dispatch => {
 
 export const fetchdataPerformancechart = (filter, range) => async dispatch => {
 
-    const res = await axios.post('http://localhost:3001/data/performance',
+    const res = await axios.post('https://dingo-server.herokuapp.com/data/performance',
         {
             "Site": localStorage.getItem('site'),
             filterData: filter,
@@ -70,7 +70,7 @@ export const fetchFilterData = (site) => async dispatch => {
 
     const data = { "Site": site }
 
-    const filterData = await axios.post('http://localhost:3001/data/filter', data)
+    const filterData = await axios.post('https://dingo-server.herokuapp.com/data/filter', data)
     const datafilter = filterData.data[0];
     console.log(datafilter)
     dispatch({
