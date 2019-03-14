@@ -42,7 +42,7 @@ module.exports = (Data) => {
             {
                 $match: {
                     'Site': site,
-                    ...req.filterData,
+                    ...req.body.filterData,
                     "$or": range
 
                 }
@@ -59,13 +59,13 @@ module.exports = (Data) => {
             }
         ])
 
-
+        const { Location, ...noA } = req.body.filterData
         let dingoData = await Data.aggregate([
 
             {
                 $match: {
                     'Site': { '$ne': site },
-                    ...req.body.filterData,
+                    ...noA,
                     "$or": range
                 }
             },
@@ -116,13 +116,14 @@ module.exports = (Data) => {
                 }
             }
         ])
+        const { Location, ...noA } = req.body.filterData
 
         let dingoData = await Data.aggregate(
             [
                 {
                     "$match": {
                         'Site': { '$ne': site },
-                        ...req.body.filterData,
+                        ...noA,
                         "$or": range
 
                     }
